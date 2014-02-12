@@ -1,4 +1,4 @@
-package as.chessproblem.application.publisher.file
+package as.chessproblem.publisher.file
 
 import com.typesafe.config.Config
 import as.chess.problem.drawer.AsciiDefinitions

@@ -1,4 +1,4 @@
-package as.chessproblem.application
+package as.chessproblem.cmdline
 
 import akka.actor._
 import as.chessproblem._

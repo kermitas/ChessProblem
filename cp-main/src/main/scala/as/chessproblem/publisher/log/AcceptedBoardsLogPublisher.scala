@@ -1,4 +1,4 @@
-package as.chessproblem.application.publisher.log
+package as.chessproblem.publisher.log
 
 import akka.actor._
 import as.akka.broadcaster._
@@ -6,7 +6,7 @@ import as.chessproblem.Messages
 import as.chess.problem.drawer._
 import as.ama.startup._
 import com.typesafe.config.Config
-import as.chessproblem.application.publisher.AcceptedBoardsPublisherClassifier
+import as.chessproblem.publisher.AcceptedBoardsPublisherClassifier
 
 class AcceptedBoardsLogPublisher(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 

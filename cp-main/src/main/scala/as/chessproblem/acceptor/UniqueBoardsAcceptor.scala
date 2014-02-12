@@ -1,4 +1,4 @@
-package as.chessproblem.application.acceptor
+package as.chessproblem.acceptor
 
 import akka.actor._
 import as.akka.broadcaster._

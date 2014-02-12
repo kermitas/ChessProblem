@@ -1,6 +1,6 @@
 package as.chess.problem.board.path
 
-import as.chess.problem.geom.PositionedPiece
+import as.chess.problem.piece.PositionedPiece
 
 class PathTrieNode(val positionedPiece: PositionedPiece) extends Serializable {
   val nodes = new scala.collection.mutable.ListBuffer[PathTrieNode]

@@ -1,4 +1,4 @@
-package as.chessproblem.application.problem
+package as.chessproblem.generator
 
 import akka.actor._
 import as.akka.broadcaster._
@@ -8,14 +8,14 @@ import as.ama.startup._
 import com.typesafe.config.Config
 import as.ama.addon.lifecycle.LifecycleListener
 
-class SmartGameEvaluator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
+class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   override def preStart() {
     try {
-      broadcaster ! new Broadcaster.Register(self, new SmartGameEvaluatorClassifier)
+      broadcaster ! new Broadcaster.Register(self, new UniqueBoardsGeneratorClassifier)
       broadcaster ! new InitializationResult(Right(None))
     } catch {
-      case e: Exception ⇒ broadcaster ! new InitializationResult(Left(new Exception("Problem while installing smart game evaluator.", e)))
+      case e: Exception ⇒ broadcaster ! new InitializationResult(Left(new Exception("Problem while installing boards generator.", e)))
     }
   }
 

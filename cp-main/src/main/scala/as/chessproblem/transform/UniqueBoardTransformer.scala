@@ -1,4 +1,4 @@
-package as.chessproblem.application.transform
+package as.chessproblem.transform
 
 import akka.actor._
 import as.akka.broadcaster.Broadcaster

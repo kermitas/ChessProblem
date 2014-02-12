@@ -1,4 +1,4 @@
-package as.chessproblem.application.controller
+package as.chessproblem.controller
 
 import akka.actor._
 import as.akka.broadcaster._
@@ -8,14 +8,14 @@ import as.ama.startup._
 import com.typesafe.config.Config
 import as.ama.addon.inputstream.InputStreamListenerCallbackImpl
 
-object ShutdownOnWorkDone {
+object ProcessController {
   final val shutdownOnAllBoardsPublishedConfigKey = "shutdownOnAllBoardsPublished"
   final val shutdownOnAllBoardsSavedConfigKey = "shutdownOnAllBoardsSaved"
 }
 
-class ShutdownOnWorkDone(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
+class ProcessController(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
-  import ShutdownOnWorkDone._
+  import ProcessController._
 
   protected var shutdownOnAllBoardsPublished: Boolean = false
   protected var shutdownOnAllBoardsSaved: Boolean = false
@@ -25,7 +25,7 @@ class ShutdownOnWorkDone(commandLineArguments: Array[String], config: Config, br
       shutdownOnAllBoardsPublished = config.getBoolean(shutdownOnAllBoardsPublishedConfigKey)
       shutdownOnAllBoardsSaved = config.getBoolean(shutdownOnAllBoardsSavedConfigKey)
 
-      broadcaster ! new Broadcaster.Register(self, new ShutdownOnWorkDoneClassifier)
+      broadcaster ! new Broadcaster.Register(self, new ProcessControllerClassifier)
       broadcaster ! new InitializationResult(Right(None))
     } catch {
       case e: Exception ⇒ broadcaster ! new InitializationResult(Left(new Exception("Problem while installing shutdown starter (on work done).", e)))

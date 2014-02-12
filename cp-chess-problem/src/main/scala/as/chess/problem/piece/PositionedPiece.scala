@@ -1,6 +1,6 @@
-package as.chess.problem.geom
+package as.chess.problem.piece
 
-import as.chess.problem.piece.Piece
+import as.chess.problem.geom.Position
 
 object PositionedPiece {
 

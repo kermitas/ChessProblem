@@ -1,8 +1,8 @@
 package as.chess.problem.board
 
 import as.chess.problem.board.{ Board ⇒ ProblemBoard }
-import as.chess.problem.piece.Piece
-import as.chess.problem.geom.{ PositionedPiece, Position }
+import as.chess.problem.piece.{ PositionedPiece, Piece }
+import as.chess.problem.geom.Position
 import as.chess.problem.board.path.BlacklistedPaths
 
 object BoardGenerator {

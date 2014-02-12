@@ -1,11 +1,11 @@
-package as.chessproblem.application.controller
+package as.chessproblem.controller
 
 import as.akka.broadcaster.Classifier
 import akka.actor.ActorRef
 import as.chessproblem.Messages
 import as.ama.addon.inputstream.InputStreamListenerCallbackImpl
 
-class ShutdownOnWorkDoneClassifier extends Classifier {
+class ProcessControllerClassifier extends Classifier {
 
   override def map(message: Any, sender: ActorRef) = message match {
     case Messages.AcceptedBoardsWerePublishedToFile ⇒ Some(message)

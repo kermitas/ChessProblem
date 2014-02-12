@@ -1,6 +1,6 @@
 package as.chess.problem.board.path.geom.transform
 
-import as.chess.problem.geom.PositionedPiece
+import as.chess.problem.piece.PositionedPiece
 
 class ClockwiseTransformer(val boardWidth: Int, val boardHeight: Int) extends Serializable {
 

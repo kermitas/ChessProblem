@@ -1,4 +1,4 @@
-package as.chessproblem.application.acceptor
+package as.chessproblem.acceptor
 
 import as.akka.broadcaster.Classifier
 import akka.actor.ActorRef
