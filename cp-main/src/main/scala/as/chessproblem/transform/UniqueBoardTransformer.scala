@@ -47,9 +47,9 @@ class UniqueBoardTransformer(commandLineArguments: Array[String], config: Config
     addWithVerticalMirroring(board)
 
     if (board.width == board.height) {
-      addWithVerticalMirroring(board.rotateClockwise(0))
       addWithVerticalMirroring(board.rotateClockwise(1))
       addWithVerticalMirroring(board.rotateClockwise(2))
+      addWithVerticalMirroring(board.rotateClockwise(3))
 
     } else {
       addIfUnique(board.mirrorHorizontally)

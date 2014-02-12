@@ -11,9 +11,9 @@ class ClockwiseTransformer(val boardWidth: Int, val boardHeight: Int) extends Se
     }
   }
 
-  def rotate90[T](input: Array[Array[T]], output: Array[Array[T]]) = apply(input, output, 0)
+  def rotate90[T](input: Array[Array[T]], output: Array[Array[T]]) = apply(input, output, 1)
 
-  def rotate180[T](input: Array[Array[T]], output: Array[Array[T]]) = apply(input, output, 1)
+  def rotate180[T](input: Array[Array[T]], output: Array[Array[T]]) = apply(input, output, 2)
 
-  def rotate270[T](input: Array[Array[T]], output: Array[Array[T]]) = apply(input, output, 2)
+  def rotate270[T](input: Array[Array[T]], output: Array[Array[T]]) = apply(input, output, 3)
 }
