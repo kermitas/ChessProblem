@@ -18,6 +18,7 @@ object Build extends Build {
     resolvers += Classpaths.typesafeSnapshots,
     libraryDependencies += "com.typesafe.akka" %% "akka-slf4j" % "2.3.0-RC2",
     libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.0.13",
+    libraryDependencies += "org.scalatest" %% "scalatest" % "2.0" % "test",
     libraryDependencies += "as.ama" %% "ama-core" % "0.4.0",
     packMain := Map("run" -> mc)
   ) ++ scalariformSettings ++ formattingPreferences
