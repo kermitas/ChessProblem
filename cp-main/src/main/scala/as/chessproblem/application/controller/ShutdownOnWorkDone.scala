@@ -6,6 +6,7 @@ import as.chessproblem.Messages
 import as.ama.addon.lifecycle._
 import as.ama.startup._
 import com.typesafe.config.Config
+import as.ama.addon.inputstream.InputStreamListenerCallbackImpl
 
 object ShutdownOnWorkDone {
   final val shutdownOnAllBoardsPublishedConfigKey = "shutdownOnAllBoardsPublished"
@@ -34,12 +35,21 @@ class ShutdownOnWorkDone(commandLineArguments: Array[String], config: Config, br
   override def postRestart(throwable: Throwable) = preStart()
 
   override def receive = {
-    case Messages.AcceptedBoardsWerePublishedToFile ⇒ if (shutdownOnAllBoardsSaved) shutdown
-    case Messages.AcceptedBoardsWerePublishedToLog  ⇒ if (shutdownOnAllBoardsPublished) shutdown
-    case message                                    ⇒ log.warning(s"Unhandled $message send by ${sender()}")
+
+    case Messages.AcceptedBoardsWerePublishedToFile ⇒ if (shutdownOnAllBoardsSaved) shutdownOnWorkDone
+
+    case Messages.AcceptedBoardsWerePublishedToLog  ⇒ if (shutdownOnAllBoardsPublished) shutdownOnWorkDone
+
+    case InputStreamListenerCallbackImpl.InputStreamText(inputText) ⇒ {
+      log.info(s"Input text ('$inputText') detected, finishing...")
+      broadcaster ! new LifecycleListener.ShutdownSystem(Right(s"Detected key press, finishing!"))
+      context.stop(self)
+    }
+
+    case message ⇒ log.warning(s"Unhandled $message send by ${sender()}")
   }
 
-  protected def shutdown {
+  protected def shutdownOnWorkDone {
     broadcaster ! new LifecycleListener.ShutdownSystem(Right(s"Work done, bye!"))
 
     /*
