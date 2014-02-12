@@ -1,4 +1,1 @@
-ChessProblem
-============
-
-My implementation of 'chess problem'.
+My 'chess problem' implementation.

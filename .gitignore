@@ -1,0 +1,5 @@
+*.iml
+.idea/
+.idea_modules/
+target/
+cp-main/boards.txt
