@@ -3,13 +3,13 @@ import org.scalatest._
 import as.chess.problem.piece._
 import as.chess.problem.board.{ BoardGenerator, Board }
 
-class GeneratedBoardsAdvancedTest extends FeatureSpec with GivenWhenThen with Matchers {
+class AdvancedBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
 
   final val runAdvancedTests = false
 
   if (runAdvancedTests) {
 
-    scenario("scenario: 8x8 board 8x Queen") {
+    scenario("advanced board scenario: 8x8 board 8x Queen") {
       Given("board (8,8)")
       val board = new Board(8, 8)
       And("8x Queen")
