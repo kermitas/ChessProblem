@@ -1,7 +1,7 @@
 import org.scalatest._
 
 import as.chess.problem.piece._
-import as.chess.problem.board.{ BoardGenerator, Board }
+import as.chess.problem.board.{ UniqueBoardsGenerator, Board }
 
 class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen with Matchers {
 
@@ -11,7 +11,7 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     And("2x King, 1x Rook")
     val piecesStream = List[Piece](King.king, Rook.rook, King.king).toStream
     When("we generate boards")
-    val boardsStream = BoardGenerator.generateBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.uniqueBoardsStream(board, piecesStream)
     Then("result should be 1 unique board")
     boardsStream.filter(_.isDefined).size should be(1)
   }
@@ -22,7 +22,7 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     And("2x King, 1x Rook")
     val piecesStream = List[Piece](Rook.rook, King.king, King.king).toStream
     When("we generate boards")
-    val boardsStream = BoardGenerator.generateBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.uniqueBoardsStream(board, piecesStream)
     Then("result should be 1 unique board")
     boardsStream.filter(_.isDefined).size should be(1)
   }
@@ -33,7 +33,7 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     And("4x Knight, 2x Rook")
     val piecesStream = List[Piece](Rook.rook, Knight.knight, Knight.knight, Rook.rook, Knight.knight, Knight.knight).toStream
     When("we generate boards")
-    val boardsStream = BoardGenerator.generateBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.uniqueBoardsStream(board, piecesStream)
     Then("result should be 2 unique boards")
     boardsStream.filter(_.isDefined).size should be(2)
   }
@@ -44,7 +44,7 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     And("4x Knight, 2x Rook")
     val piecesStream = List[Piece](Rook.rook, Rook.rook, Knight.knight, Knight.knight, Knight.knight, Knight.knight).toStream
     When("we generate boards")
-    val boardsStream = BoardGenerator.generateBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.uniqueBoardsStream(board, piecesStream)
     Then("result should be 2 unique boards")
     boardsStream.filter(_.isDefined).size should be(2)
   }
@@ -55,7 +55,7 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     And("4x Knight, 2x Rook")
     val piecesStream = List[Piece](Knight.knight, Knight.knight, Rook.rook, Rook.rook, Knight.knight, Knight.knight).toStream
     When("we generate boards")
-    val boardsStream = BoardGenerator.generateBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.uniqueBoardsStream(board, piecesStream)
     Then("result should be 2 unique boards")
     boardsStream.filter(_.isDefined).size should be(2)
   }
@@ -66,7 +66,7 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     And("4x Knight, 2x Rook")
     val piecesStream = List[Piece](Knight.knight, Rook.rook, Knight.knight, Rook.rook, Knight.knight, Knight.knight).toStream
     When("we generate boards")
-    val boardsStream = BoardGenerator.generateBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.uniqueBoardsStream(board, piecesStream)
     Then("result should be 2 unique boards")
     boardsStream.filter(_.isDefined).size should be(2)
   }

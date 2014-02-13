@@ -5,13 +5,13 @@ import as.chess.problem.piece.{ PositionedPiece, Piece }
 import as.chess.problem.geom.Position
 import as.chess.problem.board.path.BlacklistedPaths
 
-object BoardGenerator {
+object UniqueBoardsGenerator {
 
-  def generateBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
-    generateBoardsStream(board, pieces, new BlacklistedPaths(board.width, board.height), List[PositionedPiece]())
+  def uniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
+    uniqueBoardsStream(board, pieces, new BlacklistedPaths(board.width, board.height), List[PositionedPiece]())
   }
 
-  def generateBoardsStream(board: ProblemBoard, pieces: Stream[Piece], bp: BlacklistedPaths, path: List[PositionedPiece]): Stream[Option[ProblemBoard]] = {
+  def uniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece], bp: BlacklistedPaths, path: List[PositionedPiece]): Stream[Option[ProblemBoard]] = {
 
     //println("generateBoards1: HELLO, entering with board = " + as.chess.problem.drawer.AsciiDrawer.draw(board) + " pieces = " + pieces.mkString(","))
 
@@ -26,7 +26,7 @@ object BoardGenerator {
           //println("generateBoards1: board before jumping into generateBoards2 = " + as.chess.problem.drawer.AsciiDrawer.draw(board))
 
           //None #:: generateBoards2(board, positionedPieceStream, restOfPieces, bp, path)
-          None #:: generateBoards2(board, positionedPieceStream, restOfPieces, bp, path) //++ generateBoards1(board, restOfPieces, bp, path)
+          None #:: generateBoards(board, positionedPieceStream, restOfPieces, bp, path) //++ generateBoards1(board, restOfPieces, bp, path)
         }
 
         case _ ⇒ {
@@ -46,7 +46,7 @@ object BoardGenerator {
     }
   }
 
-  def generateBoards2(board: ProblemBoard, positionedPieceStream: Stream[PositionedPiece], restOfPieces: Stream[Piece], bp: BlacklistedPaths, path: List[PositionedPiece]): Stream[Option[ProblemBoard]] = {
+  def generateBoards(board: ProblemBoard, positionedPieceStream: Stream[PositionedPiece], restOfPieces: Stream[Piece], bp: BlacklistedPaths, path: List[PositionedPiece]): Stream[Option[ProblemBoard]] = {
 
     //println("generateBoards2: HeLlO, entering with board = " + as.chess.problem.drawer.AsciiDrawer.draw(board) + "piece to put = " + positionedPieceStream + " restOfPieces = " + restOfPieces.mkString(","))
 
@@ -61,7 +61,7 @@ object BoardGenerator {
 
             case Left(e) ⇒ {
               //println(s"generateBoards2: could not put piece $positionedPiece on board, returning None and rest of stream")
-              None #:: generateBoards2(board, restOfPositionedPieceStream, restOfPieces, bp, path)
+              None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, path)
             }
 
             case Right(nextBoard) ⇒ {
@@ -90,13 +90,13 @@ object BoardGenerator {
                 }
               }*/
 
-              None #:: generateBoardsStream(nextBoard, restOfPieces, bp, nextPath) ++: generateBoards2(board, restOfPositionedPieceStream, restOfPieces, bp, path)
+              None #:: uniqueBoardsStream(nextBoard, restOfPieces, bp, nextPath) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, path)
               //None #:: generateBoards2(board, restOfPositionedPieceStream, restOfPieces, bp, path) ++ generateBoards1(nextBoard, restOfPieces, bp, nextPath, startX, startY)
             }
           }
         } else {
           //println(s"generateBoards2: sorry ${positionedPiece.x},${positionedPiece.y} is not valid under path /${path.mkString("/")}!!!!!")
-          None #:: generateBoards2(board, restOfPositionedPieceStream, restOfPieces, bp, path)
+          None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, path)
         }
       }
 

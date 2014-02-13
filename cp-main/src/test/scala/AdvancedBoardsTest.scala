@@ -1,7 +1,7 @@
 import org.scalatest._
 
 import as.chess.problem.piece._
-import as.chess.problem.board.{ BoardGenerator, Board }
+import as.chess.problem.board.{ UniqueBoardsGenerator, Board }
 
 class AdvancedBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
 
@@ -15,7 +15,7 @@ class AdvancedBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
       And("8x Queen")
       val piecesStream = List[Piece](Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen).toStream
       When("we generate boards")
-      val boardsStream = BoardGenerator.generateBoardsStream(board, piecesStream)
+      val boardsStream = UniqueBoardsGenerator.uniqueBoardsStream(board, piecesStream)
       Then("result should be 12 unique board")
       boardsStream.filter(_.isDefined).size should be(12)
     }

@@ -2,7 +2,7 @@ package as.chess.problem.board.path
 
 import as.chess.problem.piece.PositionedPiece
 
-class PathPermutator(boardWidth: Int, boardHeight: Int) extends Serializable {
+object PathPermutator {
 
   def getSubPathPermutations(path: List[PositionedPiece]): List[List[PositionedPiece]] = getSubPathPermutations(path, 0)
 
@@ -35,7 +35,7 @@ class PathPermutator(boardWidth: Int, boardHeight: Int) extends Serializable {
     paths.toList
   }
 
-  protected def getSameElementsLength(path: List[PositionedPiece], startIndex: Int): Int = {
+  def getSameElementsLength(path: List[PositionedPiece], startIndex: Int): Int = {
     if (startIndex < path.length) {
       val firstElement = path(startIndex)
       var result = 0
@@ -49,7 +49,7 @@ class PathPermutator(boardWidth: Int, boardHeight: Int) extends Serializable {
       0
   }
 
-  protected def permutateSubPath(path: List[PositionedPiece], startIndex: Int, count: Int): List[List[PositionedPiece]] = {
+  def permutateSubPath(path: List[PositionedPiece], startIndex: Int, count: Int): List[List[PositionedPiece]] = {
 
     val prefix = path.take(startIndex)
     val suffix = path.drop(startIndex + count)

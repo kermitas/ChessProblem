@@ -3,11 +3,13 @@ package as.chess.problem.board.path
 import as.chess.problem.piece.PositionedPiece
 
 class PathTreeNode(val positionedPiece: PositionedPiece) extends Serializable {
-  val nodes = new scala.collection.mutable.ListBuffer[PathTreeNode]
+
+  protected val nodes = new scala.collection.mutable.ListBuffer[PathTreeNode]
 
   def get(pp: PositionedPiece): Option[PathTreeNode] = nodes.find(n ⇒ n.positionedPiece.x == pp.x && n.positionedPiece.y == pp.y && n.positionedPiece.piece == pp.piece)
 
   def get(path: List[PositionedPiece]): Option[PathTreeNode] = {
+
     path.headOption match {
 
       case Some(firstPP) ⇒ get(firstPP) match {
@@ -20,6 +22,7 @@ class PathTreeNode(val positionedPiece: PositionedPiece) extends Serializable {
   }
 
   def getOrCreate(path: List[PositionedPiece]): Option[PathTreeNode] = {
+
     path.headOption match {
 
       case Some(firstPP) ⇒ get(firstPP) match {
