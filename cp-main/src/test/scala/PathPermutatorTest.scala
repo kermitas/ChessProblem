@@ -14,7 +14,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     new PositionedPiece(5, 5, Rook.rook),
     new PositionedPiece(6, 6, Bishop.bishop))
 
-  scenario("A-1: find same elements count scenario") {
+  scenario("A-1: find same elements count scenario", PathPermutationsTestTag) {
 
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
@@ -25,7 +25,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     sameCount should be(2)
   }
 
-  scenario("A-2: find same elements count scenario") {
+  scenario("A-2: find same elements count scenario", PathPermutationsTestTag) {
 
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
@@ -36,7 +36,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     sameCount should be(1)
   }
 
-  scenario("A-3: find same elements count scenario") {
+  scenario("A-3: find same elements count scenario", PathPermutationsTestTag) {
 
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
@@ -47,7 +47,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     sameCount should be(1)
   }
 
-  scenario("A-4: find same elements count scenario") {
+  scenario("A-4: find same elements count scenario", PathPermutationsTestTag) {
 
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
@@ -58,7 +58,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     sameCount should be(3)
   }
 
-  scenario("B-1: permute sub-path scenario") {
+  scenario("B-1: permute sub-path scenario", PathPermutationsTestTag) {
 
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
@@ -69,7 +69,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     paths.size should be(1)
   }
 
-  scenario("B-2: permute sub-path scenario") {
+  scenario("B-2: permute sub-path scenario", PathPermutationsTestTag) {
 
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
@@ -80,7 +80,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     paths.size should be(2)
   }
 
-  scenario("B-3: permute sub-path scenario") {
+  scenario("B-3: permute sub-path scenario", PathPermutationsTestTag) {
 
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 

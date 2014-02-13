@@ -3,9 +3,9 @@ import org.scalatest._
 import as.chess.problem.piece._
 import as.chess.problem.board.{ UniqueBoardsGenerator, Board }
 
-class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen with Matchers {
+class SmallBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen with Matchers {
 
-  scenario("A-1: pieces permutation scenario for basic board: 3x3 board 2x King, 1x Rook") {
+  scenario("A-1: pieces permutation scenario for basic board: 3x3 board 2x King, 1x Rook", SmallBoardsWithPermutedPiecesTestTag) {
     Given("board (3,3)")
     val board = new Board(3, 3)
     And("2x King, 1x Rook")
@@ -16,7 +16,7 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     boardsStream.filter(_.isDefined).size should be(1)
   }
 
-  scenario("A-2: pieces permutation scenario for basic board: 3x3 board 2x King, 1x Rook") {
+  scenario("A-2: pieces permutation scenario for basic board: 3x3 board 2x King, 1x Rook", SmallBoardsWithPermutedPiecesTestTag) {
     Given("board (3,3)")
     val board = new Board(3, 3)
     And("2x King, 1x Rook")
@@ -27,7 +27,7 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     boardsStream.filter(_.isDefined).size should be(1)
   }
 
-  scenario("B-1: pieces permutation scenario for basic board: 4x4 board 4x Knight, 2x Rook") {
+  scenario("B-1: pieces permutation scenario for basic board: 4x4 board 4x Knight, 2x Rook", SmallBoardsWithPermutedPiecesTestTag) {
     Given("board (4,4)")
     val board = new Board(4, 4)
     And("4x Knight, 2x Rook")
@@ -38,7 +38,7 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     boardsStream.filter(_.isDefined).size should be(2)
   }
 
-  scenario("B-2: pieces permutation scenario for basic board: 4x4 board 4x Knight, 2x Rook") {
+  scenario("B-2: pieces permutation scenario for basic board: 4x4 board 4x Knight, 2x Rook", SmallBoardsWithPermutedPiecesTestTag) {
     Given("board (4,4)")
     val board = new Board(4, 4)
     And("4x Knight, 2x Rook")
@@ -49,7 +49,7 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     boardsStream.filter(_.isDefined).size should be(2)
   }
 
-  scenario("B-3: pieces permutation scenario for basic board: 4x4 board 4x Knight, 2x Rook") {
+  scenario("B-3: pieces permutation scenario for basic board: 4x4 board 4x Knight, 2x Rook", SmallBoardsWithPermutedPiecesTestTag) {
     Given("board (4,4)")
     val board = new Board(4, 4)
     And("4x Knight, 2x Rook")
@@ -60,7 +60,7 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     boardsStream.filter(_.isDefined).size should be(2)
   }
 
-  scenario("B-4: pieces permutation scenario for basic board: 4x4 board 4x Knight, 2x Rook") {
+  scenario("B-4: pieces permutation scenario for basic board: 4x4 board 4x Knight, 2x Rook", SmallBoardsWithPermutedPiecesTestTag) {
     Given("board (4,4)")
     val board = new Board(4, 4)
     And("4x Knight, 2x Rook")
@@ -70,5 +70,4 @@ class BasicBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen w
     Then("result should be 2 unique boards")
     boardsStream.filter(_.isDefined).size should be(2)
   }
-
 }

@@ -3,9 +3,9 @@ import org.scalatest._
 import as.chess.problem.piece._
 import as.chess.problem.board.{ UniqueBoardsGenerator, Board }
 
-class BasicBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
+class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
 
-  scenario("basic board scenario: 2x2 board 1x LightFlyer") {
+  scenario("basic board scenario: 2x2 board 1x LightFlyer", SmallBoardsTestTag) {
     Given("board (2,2)")
     val board = new Board(2, 2)
     And("1x LightFlyer")
@@ -16,7 +16,7 @@ class BasicBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     boardsStream.filter(_.isDefined).size should be(1)
   }
 
-  scenario("basic board scenario: 2x2 board 2x LightFlyer") {
+  scenario("basic board scenario: 2x2 board 2x LightFlyer", SmallBoardsTestTag) {
     Given("board (2,2)")
     val board = new Board(2, 2)
     And("2x LightFlyer")
@@ -27,7 +27,7 @@ class BasicBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     boardsStream.filter(_.isDefined).size should be(2)
   }
 
-  scenario("basic board scenario: 3x3 board 1x King") {
+  scenario("basic board scenario: 3x3 board 1x King", SmallBoardsTestTag) {
     Given("board (3,3)")
     val board = new Board(3, 3)
     And("1x King")
@@ -38,7 +38,7 @@ class BasicBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     boardsStream.filter(_.isDefined).size should be(3)
   }
 
-  scenario("basic board scenario: 3x3 board 2x King") {
+  scenario("basic board scenario: 3x3 board 2x King", SmallBoardsTestTag) {
     Given("board (3,3)")
     val board = new Board(3, 3)
     And("2x King")
@@ -49,7 +49,7 @@ class BasicBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     boardsStream.filter(_.isDefined).size should be(4)
   }
 
-  scenario("basic board scenario: 3x3 board 2x King, 1x Rook") {
+  scenario("basic board scenario: 3x3 board 2x King, 1x Rook", SmallBoardsTestTag) {
     Given("board (3,3)")
     val board = new Board(3, 3)
     And("2x King, 1x Rook")
@@ -60,7 +60,7 @@ class BasicBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     boardsStream.filter(_.isDefined).size should be(1)
   }
 
-  scenario("basic board scenario: 4x4 board 4x Knight, 2x Rook") {
+  scenario("basic board scenario: 4x4 board 4x Knight, 2x Rook", SmallBoardsTestTag) {
     Given("board (4,4)")
     val board = new Board(4, 4)
     And("4x Knight, 2x Rook")
@@ -71,7 +71,7 @@ class BasicBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     boardsStream.filter(_.isDefined).size should be(2)
   }
 
-  scenario("basic board scenario: 4x4 board 4x Queen") {
+  scenario("basic board scenario: 4x4 board 4x Queen", SmallBoardsTestTag, SmallQueensTestTag) {
     Given("board (4,4)")
     val board = new Board(4, 4)
     And("4x Queen")
@@ -82,7 +82,7 @@ class BasicBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     boardsStream.filter(_.isDefined).size should be(1)
   }
 
-  scenario("basic scenario: 5x5 board 5x Queen") {
+  scenario("basic scenario: 5x5 board 5x Queen", SmallBoardsTestTag, SmallQueensTestTag) {
     Given("board (5,5)")
     val board = new Board(5, 5)
     And("5x Queen")
@@ -93,7 +93,7 @@ class BasicBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     boardsStream.filter(_.isDefined).size should be(2)
   }
 
-  scenario("basic scenario: 6x6 board 6x Queen") {
+  scenario("basic scenario: 6x6 board 6x Queen", SmallBoardsTestTag, SmallQueensTestTag) {
     Given("board (6,6)")
     val board = new Board(6, 6)
     And("6x Queen")
@@ -104,7 +104,7 @@ class BasicBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     boardsStream.filter(_.isDefined).size should be(1)
   }
 
-  scenario("basic scenario: 7x7 board 7x Queen") {
+  scenario("basic scenario: 7x7 board 7x Queen", SmallBoardsTestTag, SmallQueensTestTag) {
     Given("board (7,7)")
     val board = new Board(7, 7)
     And("7x Queen")

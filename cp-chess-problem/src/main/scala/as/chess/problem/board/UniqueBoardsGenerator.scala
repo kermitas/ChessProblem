@@ -47,9 +47,7 @@ object UniqueBoardsGenerator {
         if (!bp.isBlacklisted(nextPath)) {
           board.put(positionedPiece.x, positionedPiece.y, positionedPiece.piece) match {
 
-            case Left(e) ⇒ {
-              None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, path)
-            }
+            case Left(e) ⇒ None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, path)
 
             case Right(nextBoard) ⇒ {
 
