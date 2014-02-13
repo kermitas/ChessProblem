@@ -1,5 +1,9 @@
 package as.chess.problem.geom
 
+class Position(val x: Int, val y: Int) extends Serializable {
+  override def toString = s"($x,$y)"
+}
+
 object Position {
 
   def generatePositionsStream(width: Int, height: Int): Stream[Position] = generatePositionsStream(0, 0, width, height)
@@ -38,8 +42,4 @@ object Position {
     } else
       Some((startX, startY))
   }
-}
-
-class Position(val x: Int, val y: Int) extends Serializable {
-  override def toString = s"($x,$y)"
 }

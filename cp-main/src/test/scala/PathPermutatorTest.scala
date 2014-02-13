@@ -1,5 +1,5 @@
 
-import as.chess.problem.board.path.PathPermutator
+import as.chess.problem.board.path.{ PathPermutator, PathPermutator2 }
 import as.chess.problem.piece._
 import org.scalatest.{ Matchers, GivenWhenThen, FeatureSpec }
 
@@ -91,12 +91,24 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     paths.size should be(6)
   }
 
-  scenario("C-1: permute all discovered sub-paths scenario") {
+  scenario("C-1: permute all discovered sub-paths scenario", PathPermutationsTestTag) {
 
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
     When("we want to get all permutations of all sub-paths with the same elements")
     val paths = PathPermutator.getSubPathPermutations(path)
+
+    Then("result should be 12")
+    paths.size should be(12)
+  }
+
+  scenario("D-1: permute all discovered the same elements scenario", PathPermutationsTestTag) {
+
+    Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
+
+    When("we want to get all permutations of all sub-paths with the same elements")
+    val paths = PathPermutator2.getSubPathPermutations(path)
+    paths.foreach(path ⇒ println(path.mkString("/")))
 
     Then("result should be 12")
     paths.size should be(12)

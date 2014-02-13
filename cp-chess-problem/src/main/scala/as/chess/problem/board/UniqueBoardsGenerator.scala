@@ -21,7 +21,7 @@ object UniqueBoardsGenerator {
           None #:: {
 
             val positionedPieceStream = {
-              val positions = Position.generatePositionsStream(0, 0, board.width, board.height)
+              val positions = Position.generatePositionsStream(board.width, board.height)
               PositionedPiece.generatePositionedPiecesStream(piece, positions)
             }
 
