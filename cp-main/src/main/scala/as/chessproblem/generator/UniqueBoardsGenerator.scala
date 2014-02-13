@@ -44,7 +44,7 @@ class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config,
 
       // --- test stop
 
-      self ! as.chess.problem.board.UniqueBoardsGenerator.uniqueBoardsStream(board, pieces.toStream)
+      self ! as.chess.problem.board.UniqueBoardsGenerator.generateUniqueBoardsStream(board, pieces.toStream)
     }
 
     case boardsStream: Stream[_]              ⇒ pullBoardFromTheStreamAndContinueOrStop(boardsStream.asInstanceOf[Stream[Option[Board]]])

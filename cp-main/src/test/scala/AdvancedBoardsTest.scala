@@ -15,7 +15,7 @@ class AdvancedBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
       And("8x Queen")
       val piecesStream = List[Piece](Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen).toStream
       When("we generate boards")
-      val boardsStream = UniqueBoardsGenerator.uniqueBoardsStream(board, piecesStream)
+      val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
       Then("result should be 12 unique board")
       boardsStream.filter(_.isDefined).size should be(12)
     }

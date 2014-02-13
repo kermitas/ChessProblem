@@ -7,11 +7,11 @@ import as.chess.problem.board.path.BlacklistedPaths
 
 object UniqueBoardsGenerator {
 
-  def uniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
-    uniqueBoardsStream(board, pieces, new BlacklistedPaths(board.width, board.height), List[PositionedPiece]())
+  def generateUniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
+    generateUniqueBoardsStream(board, pieces, new BlacklistedPaths(board.width, board.height), List[PositionedPiece]())
   }
 
-  def uniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece], bp: BlacklistedPaths, path: List[PositionedPiece]): Stream[Option[ProblemBoard]] = {
+  def generateUniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece], bp: BlacklistedPaths, path: List[PositionedPiece]): Stream[Option[ProblemBoard]] = {
 
     //println("generateBoards1: HELLO, entering with board = " + as.chess.problem.drawer.AsciiDrawer.draw(board) + " pieces = " + pieces.mkString(","))
 
@@ -90,7 +90,7 @@ object UniqueBoardsGenerator {
                 }
               }*/
 
-              None #:: uniqueBoardsStream(nextBoard, restOfPieces, bp, nextPath) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, path)
+              None #:: generateUniqueBoardsStream(nextBoard, restOfPieces, bp, nextPath) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, path)
               //None #:: generateBoards2(board, restOfPositionedPieceStream, restOfPieces, bp, path) ++ generateBoards1(nextBoard, restOfPieces, bp, nextPath, startX, startY)
             }
           }
