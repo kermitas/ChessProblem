@@ -1,4 +1,4 @@
-package as.chess.problem.geom.transofrm.path
+package as.chess.problem.geom.transform.path
 
 import as.chess.problem.piece.PositionedPiece
 

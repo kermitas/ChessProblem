@@ -2,21 +2,41 @@ package as.chess.problem.geom
 
 object Position {
 
+  def generatePositionsStream(width: Int, height: Int): Stream[Position] = generatePositionsStream(0, 0, width, height)
+
   def generatePositionsStream(startX: Int, startY: Int, width: Int, height: Int): Stream[Position] = {
+    normalizeStartPosition(startX, startY, width, height) match {
+      case Some((x, y)) ⇒ generatePositions(x, y, width, height)
+      case None         ⇒ Stream.empty
+    }
+  }
+
+  protected def generatePositions(startX: Int, startY: Int, width: Int, height: Int): Stream[Position] = {
     new Position(startX, startY) #:: {
-      var x = startX + 1
+      val x = startX + 1
       if (x >= width) {
-        x = 0
         val y = startY + 1
         if (y >= height) {
           Stream.empty
         } else {
-          generatePositionsStream(x, y, width, height)
+          generatePositions(0, y, width, height)
         }
       } else {
-        generatePositionsStream(x, startY, width, height)
+        generatePositions(x, startY, width, height)
       }
     }
+  }
+
+  protected def normalizeStartPosition(startX: Int, startY: Int, width: Int, height: Int): Option[(Int, Int)] = {
+    if (startX >= width) {
+      val y = startY + 1
+
+      if (y >= height)
+        None
+      else
+        Some((0, y))
+    } else
+      Some((startX, startY))
   }
 }
 
