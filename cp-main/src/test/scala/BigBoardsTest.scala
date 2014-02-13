@@ -17,7 +17,7 @@ class BigBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
   }
 
   /*
-  scenario("advanced board scenario: 9x9 board 9x Queen", BigQueensTest) {
+  scenario("advanced board scenario: 9x9 board 9x Queen", BigQueensTest, BigBoardsTestTag) {
     Given("board (9,9)")
     val board = new Board(9, 9)
     And("9x Queen")
@@ -27,6 +27,16 @@ class BigBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     Then("result should be 46 unique board")
     boardsStream.filter(_.isDefined).size should be(46)
   }
-  */
 
+  scenario("advanced board scenario: 10x10 board 10x Queen", BigQueensTest, BigBoardsTestTag) {
+    Given("board (10,10)")
+    val board = new Board(10, 10)
+    And("10x Queen")
+    val piecesStream = List[Piece](Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen).toStream
+    When("we generate boards")
+    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
+    Then("result should be 92 unique board")
+    boardsStream.filter(_.isDefined).size should be(92)
+  }
+  */
 }
