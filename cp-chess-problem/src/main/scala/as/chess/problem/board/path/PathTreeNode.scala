@@ -39,4 +39,33 @@ class PathTreeNode(val positionedPiece: PositionedPiece) extends Serializable {
       case None ⇒ Some(this)
     }
   }
+
+  /*
+  def printReport {
+    println(s"PositionedPieces in current (${positionedPiece}) node = ${nodes.size}:")
+    nodes.foreach(pathTreeNode ⇒ print(pathTreeNode.positionedPiece))
+    println()
+    nodes.foreach(_.printReport)
+  }
+  */
+
+  def getPaths: List[List[PositionedPiece]] = getPaths(List[PositionedPiece]())
+
+  protected def getPaths(abovePath: List[PositionedPiece]): List[List[PositionedPiece]] = {
+
+    val currentPath = abovePath :+ positionedPiece
+
+    if (nodes.size == 0) {
+      List[List[PositionedPiece]](currentPath)
+    } else {
+
+      val paths = new scala.collection.mutable.ListBuffer[List[PositionedPiece]]
+
+      for (pathTreeNode ← nodes) {
+        paths ++= pathTreeNode.getPaths(currentPath)
+      }
+
+      paths.toList
+    }
+  }
 }

@@ -1,5 +1,5 @@
 
-import as.chess.problem.board.path.{ PathPermutator, PathPermutator2 }
+import as.chess.problem.board.path.PathPermutator2
 import as.chess.problem.piece._
 import org.scalatest.{ Matchers, GivenWhenThen, FeatureSpec }
 
@@ -14,12 +14,13 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     new PositionedPiece(5, 5, Rook.rook),
     new PositionedPiece(6, 6, Bishop.bishop))
 
+  /*
   scenario("A-1: find same elements count scenario", PathPermutationsTestTag) {
 
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
     When("we check count starting on position 0")
-    val sameCount = PathPermutator.getSameElementsLength(path, 0)
+    val sameCount = PathPermutator2.getSameElementsLength(path, 0)
 
     Then("result should be 2")
     sameCount should be(2)
@@ -30,7 +31,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
     When("we check count starting on position 1")
-    val sameCount = PathPermutator.getSameElementsLength(path, 1)
+    val sameCount = PathPermutator2.getSameElementsLength(path, 1)
 
     Then("result should be 1")
     sameCount should be(1)
@@ -41,7 +42,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
     When("we check count starting on position 2")
-    val sameCount = PathPermutator.getSameElementsLength(path, 2)
+    val sameCount = PathPermutator2.getSameElementsLength(path, 2)
 
     Then("result should be 1")
     sameCount should be(1)
@@ -52,7 +53,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
     When("we check count starting on position 3")
-    val sameCount = PathPermutator.getSameElementsLength(path, 3)
+    val sameCount = PathPermutator2.getSameElementsLength(path, 3)
 
     Then("result should be 3")
     sameCount should be(3)
@@ -63,7 +64,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
     When("we permute sub-path starting on position 0, elements count 1")
-    val paths = PathPermutator.permutateSubPath(path, 0, 1)
+    val paths = PathPermutator2.permutateSubPath(path, 0, 1)
 
     Then("result should be 1")
     paths.size should be(1)
@@ -74,7 +75,7 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
     When("we permute sub-path starting on position 0, elements count 2")
-    val paths = PathPermutator.permutateSubPath(path, 0, 2)
+    val paths = PathPermutator2.permutateSubPath(path, 0, 2)
 
     Then("result should be 2")
     paths.size should be(2)
@@ -85,22 +86,24 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
     When("we permute sub-path starting on position 3, elements count 3")
-    val paths = PathPermutator.permutateSubPath(path, 3, 3)
+    val paths = PathPermutator2.permutateSubPath(path, 3, 3)
 
     Then("result should be 6")
     paths.size should be(6)
   }
+
 
   scenario("C-1: permute all discovered sub-paths scenario", PathPermutationsTestTag) {
 
     Given("path /King/King/Queen/Rook/Rook/Rook/Bishop")
 
     When("we want to get all permutations of all sub-paths with the same elements")
-    val paths = PathPermutator.getSubPathPermutations(path)
+    val paths = PathPermutator2.getSubPathPermutations(path)
 
     Then("result should be 12")
     paths.size should be(12)
   }
+  */
 
   scenario("D-1: permute all discovered the same elements scenario", PathPermutationsTestTag) {
 
@@ -108,9 +111,43 @@ class PathPermutatorTest extends FeatureSpec with GivenWhenThen with Matchers {
 
     When("we want to get all permutations of all sub-paths with the same elements")
     val paths = PathPermutator2.getSubPathPermutations(path)
-    paths.foreach(path ⇒ println(path.mkString("/")))
+    //paths.foreach(path ⇒ println(path.mkString("/")))
 
     Then("result should be 12")
     paths.size should be(12)
+  }
+
+  scenario("E-1: permute all discovered sub-paths scenario", PathPermutationsTestTag) {
+
+    val path = List[PositionedPiece](
+      new PositionedPiece(0, 0, King.king),
+      new PositionedPiece(1, 1, Queen.queen),
+      new PositionedPiece(2, 2, King.king))
+
+    Given("path /" + path.mkString("/"))
+
+    When("we want to get all permutations of all sub-paths with the same elements")
+    val paths = PathPermutator2.getSubPathPermutations(path)
+    //paths.foreach(path ⇒ println(path.mkString("/")))
+
+    Then("result should be 2")
+    paths.size should be(2)
+  }
+
+  scenario("F-1: permute all discovered sub-paths scenario", PathPermutationsTestTag) {
+
+    val path = List[PositionedPiece](
+      new PositionedPiece(0, 0, King.king),
+      new PositionedPiece(1, 1, Queen.queen),
+      new PositionedPiece(2, 2, Rook.rook))
+
+    Given("path /" + path.mkString("/"))
+
+    When("we want to get all permutations of all sub-paths with the same elements")
+    val paths = PathPermutator2.getSubPathPermutations(path)
+    paths.foreach(path ⇒ println(path.mkString("/")))
+
+    Then("result should be 1")
+    paths.size should be(1)
   }
 }

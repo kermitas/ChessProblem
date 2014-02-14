@@ -10,6 +10,6 @@ class BlacklistedPaths(boardWidth: Int, boardHeight: Int) extends PathTreeNode(n
   def isBlacklisted(path: List[PositionedPiece]): Boolean = get(path).isDefined
 
   def blacklist(path: List[PositionedPiece]) {
-    for (permutedPath ← PathPermutator.getSubPathPermutations(path); transformedPermutedPath ← pt.getPathTransformations(permutedPath)) getOrCreate(transformedPermutedPath)
+    for (permutedPath ← PathPermutator2.getSubPathPermutations(path); transformedPermutedPath ← pt.getPathTransformations(permutedPath)) getOrCreate(transformedPermutedPath)
   }
 }
