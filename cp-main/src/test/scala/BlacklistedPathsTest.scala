@@ -1,6 +1,6 @@
 import as.chess.problem.piece.{ Rook, Queen, King, PositionedPiece }
 import org.scalatest.{ Matchers, GivenWhenThen, FeatureSpec }
-import as.chess.problem.board.path.BlacklistedPaths
+import as.chess.problem.board.path.MemoryBlacklistedPaths
 
 class BlacklistedPathsTest extends FeatureSpec with GivenWhenThen with Matchers {
 
@@ -8,7 +8,7 @@ class BlacklistedPathsTest extends FeatureSpec with GivenWhenThen with Matchers 
 
     Given("BlacklistedPaths for board 8x8")
 
-    val bl = new BlacklistedPaths(8, 8)
+    val bl = new MemoryBlacklistedPaths(8, 8)
 
     val path = List[PositionedPiece](
       new PositionedPiece(0, 0, King.king),
@@ -20,11 +20,11 @@ class BlacklistedPathsTest extends FeatureSpec with GivenWhenThen with Matchers 
     When("we blacklist this path")
     bl.blacklist(path)
 
-    Then("result should be 4")
+    Then("result should be 24")
 
     val paths = bl.getPaths
-    paths.foreach(pp ⇒ println("/" + pp.mkString("/")))
+    //paths.foreach(pp ⇒ println("/" + pp.mkString("/")))
 
-    paths.size should be(4)
+    paths.size should be(24)
   }
 }

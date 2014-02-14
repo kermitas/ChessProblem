@@ -7,9 +7,8 @@ import as.chess.problem.geom.Position
 
 object UniqueBoardsGenerator {
 
-  var i = 0
-  def generateUniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
-    generateUniqueBoardsStream(board, 0, 0, pieces, BlacklistedPaths.createMemoryBasedPathsBlacklister(board.width, board.height), List[PositionedPiece]())
+  def generateUniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece], workMode: BlacklistedPaths.WorkMode): Stream[Option[ProblemBoard]] = {
+    generateUniqueBoardsStream(board, 0, 0, pieces, BlacklistedPaths.createPathsBlacklister(board.width, board.height, workMode), List[PositionedPiece]())
   }
 
   def generateUniqueBoardsStream(board: ProblemBoard, startX: Int, startY: Int, pieces: Stream[Piece], bp: BlacklistedPaths, path: List[PositionedPiece]): Stream[Option[ProblemBoard]] = {
@@ -23,14 +22,9 @@ object UniqueBoardsGenerator {
 
             val positionedPieceStream = {
               val positions = Position.generatePositionsStream(startX, startY, board.width, board.height)
-              //println(s"positions.size=${positions.size}")
-              i += 1
-              println(s"i=$i pieces.size=${pieces.size}")
 
               PositionedPiece.generatePositionedPiecesStream(piece, positions)
             }
-
-            //println(s"positionedPieceStream.size=${positionedPieceStream.size}")
 
             generateBoards(board, positionedPieceStream, restOfPieces, bp, path)
           }
@@ -60,9 +54,6 @@ object UniqueBoardsGenerator {
 
               bp.blacklist(nextPath)
 
-              //println(s"after blacklisting path /${nextPath.mkString("/")}:")
-              //bp.getPaths.foreach(pp ⇒ println("/" + pp.mkString("/")))
-
               var startX = 0
               var startY = 0
 
@@ -74,7 +65,6 @@ object UniqueBoardsGenerator {
               */
 
               None #:: generateUniqueBoardsStream(nextBoard, startX, startY, restOfPieces, bp, nextPath) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, path)
-              //None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, path) ++: generateUniqueBoardsStream(nextBoard, startX, startY, restOfPieces, bp, nextPath)
             }
           }
         } else {

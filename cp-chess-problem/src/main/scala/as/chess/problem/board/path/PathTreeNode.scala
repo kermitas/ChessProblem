@@ -40,15 +40,6 @@ class PathTreeNode(val positionedPiece: PositionedPiece) extends Serializable {
     }
   }
 
-  /*
-  def printReport {
-    println(s"PositionedPieces in current (${positionedPiece}) node = ${nodes.size}:")
-    nodes.foreach(pathTreeNode ⇒ print(pathTreeNode.positionedPiece))
-    println()
-    nodes.foreach(_.printReport)
-  }
-  */
-
   def getPaths: List[List[PositionedPiece]] = getPaths(List[PositionedPiece]())
 
   protected def getPaths(abovePath: List[PositionedPiece]): List[List[PositionedPiece]] = {

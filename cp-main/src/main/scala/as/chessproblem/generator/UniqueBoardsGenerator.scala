@@ -7,11 +7,23 @@ import as.chess.problem.board.Board
 import as.ama.startup._
 import com.typesafe.config.Config
 import as.ama.addon.lifecycle.LifecycleListener
+import as.chess.problem.board.path.BlacklistedPaths
+
+object UniqueBoardsGenerator {
+  final val workModeConfigKey = "workMode"
+}
 
 class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
+  import UniqueBoardsGenerator._
+
+  protected var workMode: BlacklistedPaths.WorkMode = _
+
   override def preStart() {
     try {
+
+      workMode = BlacklistedPaths.getWorkMode(config.getString(workModeConfigKey))
+
       broadcaster ! new Broadcaster.Register(self, new UniqueBoardsGeneratorClassifier)
 
       broadcaster ! new InitializationResult(Right(None))
@@ -24,34 +36,13 @@ class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config,
 
   override def receive = {
 
-    case Messages.ProblemSettings(board, pieces) ⇒ {
+    case Messages.ProblemSettings(board, pieces) ⇒ self ! as.chess.problem.board.UniqueBoardsGenerator.generateUniqueBoardsStream(board, pieces.toStream, workMode)
 
-      // --- test start
-      /*
-      import as.chess.problem.piece._
-      import as.chess.problem.geom.transofrm.path.PathTransformer
-      val pt = new PathTransformer(8, 8)
+    case boardsStream: Stream[_]                 ⇒ pullBoardFromTheStreamAndContinueOrStop(boardsStream.asInstanceOf[Stream[Option[Board]]])
 
-      val path = List[PositionedPiece](
-        new PositionedPiece(0, 0, King.king),
-        new PositionedPiece(1, 1, King.king),
-        new PositionedPiece(2, 2, Queen.queen))
+    case ss: LifecycleListener.ShutdownSystem    ⇒ context.stop(self)
 
-      val paths = pt.getPathTransformations(path)
-
-      paths.foreach(path ⇒ println(path.mkString("/")))
-      */
-
-      // --- test stop
-
-      self ! as.chess.problem.board.UniqueBoardsGenerator.generateUniqueBoardsStream(board, pieces.toStream)
-    }
-
-    case boardsStream: Stream[_]              ⇒ pullBoardFromTheStreamAndContinueOrStop(boardsStream.asInstanceOf[Stream[Option[Board]]])
-
-    case ss: LifecycleListener.ShutdownSystem ⇒ context.stop(self)
-
-    case message                              ⇒ log.warning(s"Unhandled $message send by ${sender()}")
+    case message                                 ⇒ log.warning(s"Unhandled $message send by ${sender()}")
   }
 
   protected def pullBoardFromTheStreamAndContinueOrStop(boardsStream: Stream[Option[Board]]) {
@@ -62,23 +53,15 @@ class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config,
         boardOption match {
 
           case Some(board) ⇒ {
-            //println("SmartGameEvaluator: ... received Some(board)")
-
             broadcaster ! new Messages.GeneratedUniqueBoard(board)
-
             self ! restOfBoards
           }
 
-          case None ⇒ {
-            //println("SmartGameEvaluator: ... received None")
-            self ! restOfBoards
-          }
+          case None ⇒ self ! restOfBoards
         }
-
       }
 
       case _ ⇒ {
-        //println("SmartGameEvaluator: ... no boards in stream, finishing")
         broadcaster ! Messages.AllUniqueBoardsWereGenerated
         context.stop(self)
       }

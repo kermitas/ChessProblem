@@ -1,3 +1,4 @@
+import as.chess.problem.board.path.BlacklistedPaths
 import org.scalatest._
 
 import as.chess.problem.piece._
@@ -5,13 +6,15 @@ import as.chess.problem.board.{ UniqueBoardsGenerator, Board }
 
 class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
 
+  val workMode = BlacklistedPaths.MemoryWorkMode
+
   scenario("basic board scenario: 2x2 board 1x LightFlyer", SmallBoardsTestTag) {
     Given("board (2,2)")
     val board = new Board(2, 2)
     And("1x LightFlyer")
     val piecesStream = List[Piece](LightFlyer.lightFlyer).toStream
     When("we generate boards")
-    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream, workMode)
     Then("result should be 1 unique board")
     boardsStream.filter(_.isDefined).size should be(1)
   }
@@ -22,7 +25,7 @@ class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     And("2x LightFlyer")
     val piecesStream = List[Piece](LightFlyer.lightFlyer, LightFlyer.lightFlyer).toStream
     When("we generate boards")
-    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream, workMode)
     Then("result should be 2 unique boards")
     boardsStream.filter(_.isDefined).size should be(2)
   }
@@ -33,7 +36,7 @@ class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     And("1x King")
     val piecesStream = List[Piece](King.king).toStream
     When("we generate boards")
-    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream, workMode)
     Then("result should be 3 unique board")
     boardsStream.filter(_.isDefined).size should be(3)
   }
@@ -44,7 +47,7 @@ class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     And("2x King")
     val piecesStream = List[Piece](King.king, King.king).toStream
     When("we generate boards")
-    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream, workMode)
     Then("result should be 4 unique boards")
     boardsStream.filter(_.isDefined).size should be(4)
   }
@@ -55,7 +58,7 @@ class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     And("2x King, 1x Rook")
     val piecesStream = List[Piece](King.king, King.king, Rook.rook).toStream
     When("we generate boards")
-    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream, workMode)
     Then("result should be 1 unique board")
     boardsStream.filter(_.isDefined).size should be(1)
   }
@@ -66,7 +69,7 @@ class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     And("4x Knight, 2x Rook")
     val piecesStream = List[Piece](Knight.knight, Knight.knight, Knight.knight, Knight.knight, Rook.rook, Rook.rook).toStream
     When("we generate boards")
-    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream, workMode)
     Then("result should be 2 unique boards")
     boardsStream.filter(_.isDefined).size should be(2)
   }
@@ -77,7 +80,7 @@ class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     And("4x Queen")
     val piecesStream = List[Piece](Queen.queen, Queen.queen, Queen.queen, Queen.queen).toStream
     When("we generate boards")
-    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream, workMode)
     Then("result should be 1 unique board")
     boardsStream.filter(_.isDefined).size should be(1)
   }
@@ -88,7 +91,7 @@ class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     And("5x Queen")
     val piecesStream = List[Piece](Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen).toStream
     When("we generate boards")
-    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream, workMode)
     Then("result should be 2 unique boards")
     boardsStream.filter(_.isDefined).size should be(2)
   }
@@ -99,7 +102,7 @@ class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     And("6x Queen")
     val piecesStream = List[Piece](Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen).toStream
     When("we generate boards")
-    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream, workMode)
     Then("result should be 1 unique board")
     boardsStream.filter(_.isDefined).size should be(1)
   }
@@ -110,7 +113,7 @@ class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     And("7x Queen")
     val piecesStream = List[Piece](Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen, Queen.queen).toStream
     When("we generate boards")
-    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream)
+    val boardsStream = UniqueBoardsGenerator.generateUniqueBoardsStream(board, piecesStream, workMode)
     Then("result should be 6 unique board")
     boardsStream.filter(_.isDefined).size should be(6)
   }

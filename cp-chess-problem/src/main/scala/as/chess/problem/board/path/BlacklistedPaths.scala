@@ -4,16 +4,22 @@ import as.chess.problem.geom.transform.path.PathTransformer
 import as.chess.problem.piece.PositionedPiece
 
 object BlacklistedPaths {
-  def createPathsBlacklister(boardWidth: Int, boardHeight: Int, ifTrueThenMemoryBasedIfFalseThenCPUBased: Boolean) = {
-    if (ifTrueThenMemoryBasedIfFalseThenCPUBased)
-      new MemoryBlacklistedPaths(boardWidth, boardHeight)
-    else
-      new CpuBlacklistedPaths(boardWidth, boardHeight)
+
+  sealed abstract class WorkMode(val name: String) extends Serializable
+  case object MemoryWorkMode extends WorkMode("memory")
+  case object CpuWorkMode extends WorkMode("cpu")
+
+  def getWorkMode(workModeName: String): WorkMode = workModeName.toLowerCase match {
+    case MemoryWorkMode.name ⇒ MemoryWorkMode
+    case CpuWorkMode.name    ⇒ CpuWorkMode
   }
 
-  def createMemoryBasedPathsBlacklister(boardWidth: Int, boardHeight: Int) = createPathsBlacklister(boardWidth, boardHeight, true)
-
-  def createCpuBasedPathsBlacklister(boardWidth: Int, boardHeight: Int) = createPathsBlacklister(boardWidth, boardHeight, false)
+  def createPathsBlacklister(boardWidth: Int, boardHeight: Int, workMode: WorkMode) = {
+    workMode match {
+      case MemoryWorkMode ⇒ new MemoryBlacklistedPaths(boardWidth, boardHeight)
+      case CpuWorkMode    ⇒ new CpuBlacklistedPaths(boardWidth, boardHeight)
+    }
+  }
 }
 
 abstract class BlacklistedPaths(boardWidth: Int, boardHeight: Int) extends PathTreeNode(new PositionedPiece(0, 0, null)) {
@@ -21,7 +27,6 @@ abstract class BlacklistedPaths(boardWidth: Int, boardHeight: Int) extends PathT
   val pt = new PathTransformer(boardWidth, boardHeight)
 
   def isBlacklisted(path: List[PositionedPiece]): Boolean
-
   def blacklist(path: List[PositionedPiece])
 }
 
