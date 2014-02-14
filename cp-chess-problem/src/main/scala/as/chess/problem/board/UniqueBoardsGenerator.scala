@@ -9,7 +9,7 @@ object UniqueBoardsGenerator {
 
   var i = 0
   def generateUniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
-    generateUniqueBoardsStream(board, 0, 0, pieces, new BlacklistedPaths(board.width, board.height), List[PositionedPiece]())
+    generateUniqueBoardsStream(board, 0, 0, pieces, BlacklistedPaths.createMemoryBasedPathsBlacklister(board.width, board.height), List[PositionedPiece]())
   }
 
   def generateUniqueBoardsStream(board: ProblemBoard, startX: Int, startY: Int, pieces: Stream[Piece], bp: BlacklistedPaths, path: List[PositionedPiece]): Stream[Option[ProblemBoard]] = {
