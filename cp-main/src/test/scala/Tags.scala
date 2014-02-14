@@ -8,7 +8,5 @@ object BigBoardsTestTag extends Tag("BigBoardsTest")
 
 object SmallBoardsWithPermutedPiecesTestTag extends Tag("SmallBoardsWithPermutedPiecesTest")
 
-object PathPermutationsTestTag extends Tag("PathPermutationsTest")
-
 object BlacklistedPathsTestTag extends Tag("BlacklistedPathsTest")
 
