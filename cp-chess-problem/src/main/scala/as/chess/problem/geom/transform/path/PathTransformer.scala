@@ -1,6 +1,7 @@
 package as.chess.problem.geom.transform.path
 
 import as.chess.problem.piece.PositionedPiece
+import as.chess.problem.geom.transform._
 
 class PathTransformer(boardWidth: Int, boardHeight: Int) extends Serializable {
 
@@ -23,9 +24,9 @@ class PathTransformer(boardWidth: Int, boardHeight: Int) extends Serializable {
     addWithVerticalMirroring(path)
 
     if (boardWidth == boardHeight) {
-      addWithVerticalMirroring(ct(path, 1))
-      addWithVerticalMirroring(ct(path, 2))
-      addWithVerticalMirroring(ct(path, 3))
+      addWithVerticalMirroring(ct(path, ClockwiseQuadrantRotation90))
+      addWithVerticalMirroring(ct(path, ClockwiseQuadrantRotation180))
+      addWithVerticalMirroring(ct(path, ClockwiseQuadrantRotation270))
     } else {
       paths += hmt(path)
       paths += vhmt(path)

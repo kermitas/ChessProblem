@@ -6,6 +6,7 @@ import as.ama.startup.InitializationResult
 import as.chessproblem.Messages
 import com.typesafe.config.Config
 import as.chess.problem.board.Board
+import as.chess.problem.geom.transform._
 
 class UniqueBoardTransformer(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
@@ -47,9 +48,9 @@ class UniqueBoardTransformer(commandLineArguments: Array[String], config: Config
     addWithVerticalMirroring(board)
 
     if (board.width == board.height) {
-      addWithVerticalMirroring(board.rotateClockwise(1))
-      addWithVerticalMirroring(board.rotateClockwise(2))
-      addWithVerticalMirroring(board.rotateClockwise(3))
+      addWithVerticalMirroring(board.rotateClockwise(ClockwiseQuadrantRotation90))
+      addWithVerticalMirroring(board.rotateClockwise(ClockwiseQuadrantRotation180))
+      addWithVerticalMirroring(board.rotateClockwise(ClockwiseQuadrantRotation270))
 
     } else {
       addIfUnique(board.mirrorHorizontally)

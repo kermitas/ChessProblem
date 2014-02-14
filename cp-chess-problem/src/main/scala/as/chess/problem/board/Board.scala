@@ -7,6 +7,7 @@ import as.chess.classic.piece.{ Piece ⇒ ClassicPiece }
 import as.chess.problem.piece.{ Piece ⇒ ProblemPiece, TakingOtherPieceException }
 import as.chess.problem.field.{ Safe, Unsafe, UnsafeFieldException }
 import as.chess.problem.geom.transform.array._
+import as.chess.problem.geom.transform.ClockwiseQuadrantRotation
 
 object Board {
 
@@ -144,9 +145,9 @@ class Board(array: Array[Array[ClassicField[ClassicPiece]]]) extends ClassicBoar
     newBoard
   }
 
-  def rotateClockwise(numberOf90rotations: Int): Board = {
+  def rotateClockwise(clockwiseQuadrantRotation: ClockwiseQuadrantRotation): Board = {
     val newBoard = new Board(height, width)
-    ct(array, newBoard.array, numberOf90rotations)
+    ct(array, newBoard.array, clockwiseQuadrantRotation)
     newBoard
   }
 }

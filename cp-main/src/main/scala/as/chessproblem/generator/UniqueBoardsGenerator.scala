@@ -10,19 +10,19 @@ import as.ama.addon.lifecycle.LifecycleListener
 import as.chess.problem.board.path.BlacklistedPaths
 
 object UniqueBoardsGenerator {
-  final val workModeConfigKey = "workMode"
+  final val heavilyUseConfigKey = "heavilyUse"
 }
 
 class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   import UniqueBoardsGenerator._
 
-  protected var workMode: BlacklistedPaths.WorkMode = _
+  protected var heavilyUse: BlacklistedPaths.WorkMode = _
 
   override def preStart() {
     try {
 
-      workMode = BlacklistedPaths.getWorkMode(config.getString(workModeConfigKey))
+      heavilyUse = BlacklistedPaths.getWorkMode(config.getString(heavilyUseConfigKey))
 
       broadcaster ! new Broadcaster.Register(self, new UniqueBoardsGeneratorClassifier)
 
@@ -36,7 +36,7 @@ class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config,
 
   override def receive = {
 
-    case Messages.ProblemSettings(board, pieces) ⇒ self ! as.chess.problem.board.UniqueBoardsGenerator.generateUniqueBoardsStream(board, pieces.toStream, workMode)
+    case Messages.ProblemSettings(board, pieces) ⇒ self ! as.chess.problem.board.UniqueBoardsGenerator.generateUniqueBoardsStream(board, pieces.toStream, heavilyUse)
 
     case boardsStream: Stream[_]                 ⇒ pullBoardFromTheStreamAndContinueOrStop(boardsStream.asInstanceOf[Stream[Option[Board]]])
 
