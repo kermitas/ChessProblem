@@ -10,3 +10,5 @@ object SmallBoardsWithPermutedPiecesTestTag extends Tag("SmallBoardsWithPermuted
 
 object BlacklistedPathsTestTag extends Tag("BlacklistedPathsTest")
 
+object AbcTestTag extends Tag("AbcTest")
+

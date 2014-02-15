@@ -6,7 +6,7 @@ import as.chess.problem.board.{ UniqueBoardsGenerator, Board }
 
 class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
 
-  val workMode = BlacklistedPaths.MemoryWorkMode
+  val workMode = BlacklistedPaths.CpuWorkStrategy
 
   scenario("basic board scenario: 2x2 board 1x LightFlyer", SmallBoardsTestTag) {
     Given("board (2,2)")

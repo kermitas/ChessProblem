@@ -7,7 +7,7 @@ import as.chess.problem.geom.Position
 
 object UniqueBoardsGenerator {
 
-  def generateUniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece], workMode: BlacklistedPaths.WorkMode): Stream[Option[ProblemBoard]] = {
+  def generateUniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece], workMode: BlacklistedPaths.WorkStrategy): Stream[Option[ProblemBoard]] = {
     generateUniqueBoardsStream(board, 0, 0, pieces, BlacklistedPaths.createPathsBlacklister(board.width, board.height, workMode), List[PositionedPiece]())
   }
 

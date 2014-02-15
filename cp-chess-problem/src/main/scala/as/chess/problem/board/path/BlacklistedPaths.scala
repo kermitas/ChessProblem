@@ -5,20 +5,18 @@ import as.chess.problem.piece.PositionedPiece
 
 object BlacklistedPaths {
 
-  sealed abstract class WorkMode(val name: String) extends Serializable
-  case object MemoryWorkMode extends WorkMode("memory")
-  case object CpuWorkMode extends WorkMode("cpu")
+  sealed abstract class WorkStrategy(val name: String) extends Serializable
+  case object MemoryWorkStrategy extends WorkStrategy("memory")
+  case object CpuWorkStrategy extends WorkStrategy("cpu")
 
-  def getWorkMode(workModeName: String): WorkMode = workModeName.toLowerCase match {
-    case MemoryWorkMode.name ⇒ MemoryWorkMode
-    case CpuWorkMode.name    ⇒ CpuWorkMode
+  def getWorkStrategy(strategyName: String): WorkStrategy = strategyName.toLowerCase match {
+    case MemoryWorkStrategy.name ⇒ MemoryWorkStrategy
+    case CpuWorkStrategy.name    ⇒ CpuWorkStrategy
   }
 
-  def createPathsBlacklister(boardWidth: Int, boardHeight: Int, workMode: WorkMode) = {
-    workMode match {
-      case MemoryWorkMode ⇒ new MemoryBlacklistedPaths(boardWidth, boardHeight)
-      case CpuWorkMode    ⇒ new CpuBlacklistedPaths(boardWidth, boardHeight)
-    }
+  def createPathsBlacklister(boardWidth: Int, boardHeight: Int, workStrategy: WorkStrategy) = workStrategy match {
+    case MemoryWorkStrategy ⇒ new MemoryBlacklistedPaths(boardWidth, boardHeight)
+    case CpuWorkStrategy    ⇒ new CpuBlacklistedPaths(boardWidth, boardHeight)
   }
 }
 
@@ -28,28 +26,4 @@ abstract class BlacklistedPaths(boardWidth: Int, boardHeight: Int) extends PathT
 
   def isBlacklisted(path: List[PositionedPiece]): Boolean
   def blacklist(path: List[PositionedPiece])
-}
-
-class MemoryBlacklistedPaths(boardWidth: Int, boardHeight: Int) extends BlacklistedPaths(boardWidth, boardHeight) {
-
-  override def isBlacklisted(path: List[PositionedPiece]): Boolean = get(path).isDefined
-
-  override def blacklist(path: List[PositionedPiece]) {
-    for (permutedPath ← path.permutations.toList; transformedPermutedPath ← pt.getPathTransformations(permutedPath)) getOrCreate(transformedPermutedPath)
-  }
-}
-
-class CpuBlacklistedPaths(boardWidth: Int, boardHeight: Int) extends BlacklistedPaths(boardWidth, boardHeight) {
-
-  override def isBlacklisted(path: List[PositionedPiece]): Boolean = {
-    path.permutations.toList.find { permutedPath ⇒
-      pt.getPathTransformations(permutedPath).find { transformedPermutedPath ⇒
-        get(transformedPermutedPath).isDefined
-      }.isDefined
-    }.isDefined
-  }
-
-  override def blacklist(path: List[PositionedPiece]) {
-    getOrCreate(path)
-  }
 }

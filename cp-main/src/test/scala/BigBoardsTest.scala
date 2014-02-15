@@ -6,7 +6,7 @@ import as.chess.problem.board.{ UniqueBoardsGenerator, Board }
 
 class BigBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
 
-  val workMode = BlacklistedPaths.CpuWorkMode
+  val workMode = BlacklistedPaths.CpuWorkStrategy
 
   scenario("advanced board scenario: 8x8 board 8x Queen", BigBoardsTestTag, BigQueensTestTag) {
     Given("board (8,8)")

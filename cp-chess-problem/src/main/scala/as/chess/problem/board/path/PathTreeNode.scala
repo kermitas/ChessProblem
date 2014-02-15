@@ -25,15 +25,19 @@ class PathTreeNode(val positionedPiece: PositionedPiece) extends Serializable {
 
     path.headOption match {
 
-      case Some(firstPP) ⇒ get(firstPP) match {
+      case Some(firstPP) ⇒ {
+        val node = get(firstPP) match {
 
-        case Some(node) ⇒ node.getOrCreate(path.tail)
+          case Some(node) ⇒ node
 
-        case None ⇒ {
-          val node = new PathTreeNode(firstPP)
-          nodes += node
-          node.getOrCreate(path.tail)
+          case None ⇒ {
+            val node = new PathTreeNode(firstPP)
+            nodes += node
+            node
+          }
         }
+
+        node.getOrCreate(path.tail)
       }
 
       case None ⇒ Some(this)

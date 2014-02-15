@@ -10,19 +10,19 @@ import as.ama.addon.lifecycle.LifecycleListener
 import as.chess.problem.board.path.BlacklistedPaths
 
 object UniqueBoardsGenerator {
-  final val heavilyUseConfigKey = "heavilyUse"
+  final val workStrategyConfigKey = "workStrategy"
 }
 
 class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   import UniqueBoardsGenerator._
 
-  protected var heavilyUse: BlacklistedPaths.WorkMode = _
+  protected var workStrategy: BlacklistedPaths.WorkStrategy = _
 
   override def preStart() {
     try {
 
-      heavilyUse = BlacklistedPaths.getWorkMode(config.getString(heavilyUseConfigKey))
+      workStrategy = BlacklistedPaths.getWorkStrategy(config.getString(workStrategyConfigKey))
 
       broadcaster ! new Broadcaster.Register(self, new UniqueBoardsGeneratorClassifier)
 
@@ -36,16 +36,16 @@ class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config,
 
   override def receive = {
 
-    case Messages.ProblemSettings(board, pieces) ⇒ self ! as.chess.problem.board.UniqueBoardsGenerator.generateUniqueBoardsStream(board, pieces.toStream, heavilyUse)
+    case Messages.ProblemSettings(board, pieces) ⇒ self ! as.chess.problem.board.UniqueBoardsGenerator.generateUniqueBoardsStream(board, pieces.toStream, workStrategy)
 
-    case boardsStream: Stream[_]                 ⇒ pullBoardFromTheStreamAndContinueOrStop(boardsStream.asInstanceOf[Stream[Option[Board]]])
+    case boardsStream: Stream[_]                 ⇒ pullBoardFromTheStreamThenContinueOrStop(boardsStream.asInstanceOf[Stream[Option[Board]]])
 
     case ss: LifecycleListener.ShutdownSystem    ⇒ context.stop(self)
 
     case message                                 ⇒ log.warning(s"Unhandled $message send by ${sender()}")
   }
 
-  protected def pullBoardFromTheStreamAndContinueOrStop(boardsStream: Stream[Option[Board]]) {
+  protected def pullBoardFromTheStreamThenContinueOrStop(boardsStream: Stream[Option[Board]]) {
     boardsStream match {
 
       case boardOption #:: restOfBoards ⇒ {

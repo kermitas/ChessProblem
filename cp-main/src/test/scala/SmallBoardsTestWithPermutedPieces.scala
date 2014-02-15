@@ -6,7 +6,7 @@ import as.chess.problem.board.path.BlacklistedPaths
 
 class SmallBoardsTestWithPermutedPieces extends FeatureSpec with GivenWhenThen with Matchers {
 
-  val workMode = BlacklistedPaths.MemoryWorkMode
+  val workMode = BlacklistedPaths.CpuWorkStrategy
 
   scenario("A-1: pieces permutation scenario for basic board: 3x3 board 2x King, 1x Rook", SmallBoardsWithPermutedPiecesTestTag) {
     Given("board (3,3)")
