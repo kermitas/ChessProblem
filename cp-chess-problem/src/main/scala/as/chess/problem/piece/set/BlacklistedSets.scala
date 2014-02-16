@@ -22,7 +22,7 @@ class MutableBlacklistedSets(boardWidth: Int, boardHeight: Int)(treeSetBuilder: 
 class BlacklistedSets(val pt: PathTransformer, val sets: TreeSet[Set[PositionedPiece]])(treeSetBuilder: CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]]) {
 
   //val setBuilder = treeSetBuilder.asInstanceOf[CanBuildFrom[Set[PositionedPiece], PositionedPiece, Set[PositionedPiece]]]
-  val setBuilder: scala.collection.generic.CanBuildFrom[Set[PositionedPiece], PositionedPiece, Set[PositionedPiece]] = collection.immutable.TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceOrdering).asInstanceOf[scala.collection.generic.CanBuildFrom[Set[PositionedPiece], PositionedPiece, Set[PositionedPiece]]]
+  val setBuilder: scala.collection.generic.CanBuildFrom[Set[PositionedPiece], PositionedPiece, Set[PositionedPiece]] = collection.immutable.TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceOrdering(pt.boardHeight)).asInstanceOf[scala.collection.generic.CanBuildFrom[Set[PositionedPiece], PositionedPiece, Set[PositionedPiece]]]
   //val pt = new PathTransformer(boardWidth, boardHeight)
 
   //val setsBuilder: scala.collection.generic.CanBuildFrom[TreeSet[Set[PositionedPiece]], Set[PositionedPiece], TreeSet[Set[PositionedPiece]]] = TreeSet.newCanBuildFrom[Set[PositionedPiece]](new UniqueSetOfPositionedPiecesOrdering)

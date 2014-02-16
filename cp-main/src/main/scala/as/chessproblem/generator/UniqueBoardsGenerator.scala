@@ -7,22 +7,24 @@ import as.chess.problem.board.Board
 import as.ama.startup._
 import com.typesafe.config.Config
 import as.ama.addon.lifecycle.LifecycleListener
-import as.chess.problem.board.path.BlacklistedPaths
+//import as.chess.problem.board.path.BlacklistedPaths
 
+/*
 object UniqueBoardsGenerator {
   final val workStrategyConfigKey = "workStrategy"
 }
+*/
 
 class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
-  import UniqueBoardsGenerator._
+  //import UniqueBoardsGenerator._
 
-  protected var workStrategy: BlacklistedPaths.WorkStrategy = _
+  //protected var workStrategy: BlacklistedPaths.WorkStrategy = _
 
   override def preStart() {
     try {
 
-      workStrategy = BlacklistedPaths.getWorkStrategy(config.getString(workStrategyConfigKey))
+      //workStrategy = BlacklistedPaths.getWorkStrategy(config.getString(workStrategyConfigKey))
 
       broadcaster ! new Broadcaster.Register(self, new UniqueBoardsGeneratorClassifier)
 
@@ -36,7 +38,7 @@ class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config,
 
   override def receive = {
 
-    case Messages.ProblemSettings(board, pieces) ⇒ self ! as.chess.problem.board.UniqueBoardsGenerator.generateUniqueBoardsStream(board, pieces.toStream, workStrategy)
+    case Messages.ProblemSettings(board, pieces) ⇒ self ! as.chess.problem.board.UniqueBoardsGenerator.generateUniqueBoardsStream(board, pieces.toStream)
 
     case boardsStream: Stream[_]                 ⇒ pullBoardFromTheStreamThenContinueOrStop(boardsStream.asInstanceOf[Stream[Option[Board]]])
 

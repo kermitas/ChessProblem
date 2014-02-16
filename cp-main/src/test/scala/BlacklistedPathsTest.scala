@@ -1,3 +1,4 @@
+/*
 import as.chess.problem.piece.{ Rook, Queen, King, PositionedPiece }
 import org.scalatest.{ Matchers, GivenWhenThen, FeatureSpec }
 import as.chess.problem.board.path.MemoryBlacklistedPaths
@@ -54,3 +55,4 @@ class BlacklistedPathsTest extends FeatureSpec with GivenWhenThen with Matchers 
     paths.size should be(24)
   }
 }
+*/ 

@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.geom.transform.path
 
 import as.chess.problem.piece.PositionedPiece
@@ -15,3 +16,4 @@ class ClockwiseTransformer(val boardWidth: Int, val boardHeight: Int) extends Se
 
   def rotate270(path: List[PositionedPiece]) = apply(path, ClockwiseQuadrantRotation270)
 }
+*/ 

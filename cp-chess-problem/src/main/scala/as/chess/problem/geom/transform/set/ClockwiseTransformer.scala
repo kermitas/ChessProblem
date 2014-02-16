@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.geom.transform.set
 
 import scala.collection.{ Set ⇒ GenericSet }
@@ -16,3 +17,4 @@ class ClockwiseTransformer(val boardWidth: Int, val boardHeight: Int) extends Se
 
   def rotate270(set: GenericSet[PositionedPiece]) = apply(set, ClockwiseQuadrantRotation270)
 }
+*/

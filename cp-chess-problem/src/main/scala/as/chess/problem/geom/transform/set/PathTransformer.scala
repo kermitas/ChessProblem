@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.geom.transform.set
 
 import scala.collection.{ Set ⇒ GenericSet }
@@ -35,3 +36,4 @@ class PathTransformer(boardWidth: Int, boardHeight: Int) extends Serializable {
     paths
   }
 }
+*/ 

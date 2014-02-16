@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.board.path
 
 import as.chess.problem.geom.transform.path.PathTransformer
@@ -27,3 +28,4 @@ abstract class BlacklistedPaths(boardWidth: Int, boardHeight: Int) extends PathT
   def isBlacklisted(path: List[PositionedPiece]): Boolean
   def blacklist(path: List[PositionedPiece])
 }
+*/

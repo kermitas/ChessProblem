@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.piece.tree
 
 object PositionedPieceTreeNodeOrdering extends Ordering[PositionedPieceTreeNode] {
@@ -16,4 +17,4 @@ object PositionedPieceTreeNodeOrdering extends Ordering[PositionedPieceTreeNode]
     }
 
   }
-}
+}*/ 

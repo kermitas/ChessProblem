@@ -12,12 +12,12 @@ import as.chess.problem.piece.set.DistanceBasedPositionedPieceOrdering
 
 object UniqueBoardsGenerator {
 
-  def generateUniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece], workMode: as.chess.problem.board.path.BlacklistedPaths.WorkStrategy): Stream[Option[ProblemBoard]] = {
+  def generateUniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
 
-    val treeSetBuilder: scala.collection.generic.CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]] = TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceOrdering)
+    val treeSetBuilder: scala.collection.generic.CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]] = TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceOrdering(board.height))
 
     val bl = new MutableBlacklistedSets(board.width, board.height)(treeSetBuilder)
-    val piecesOnBoard = TreeSet[PositionedPiece]()(new DistanceBasedPositionedPieceOrdering)
+    val piecesOnBoard = TreeSet[PositionedPiece]()(new DistanceBasedPositionedPieceOrdering(board.height))
     generateUniqueBoardsStream(board, 0, 0, pieces, bl, piecesOnBoard)
   }
 
@@ -31,16 +31,16 @@ object UniqueBoardsGenerator {
 
           //println(s"A: taking first piece $piece and trying to put it, piecesOnBoard=${piecesOnBoard.mkString(", ")}, restOfPieces=${restOfPieces.mkString(", ")}")
 
-          //{
+          None #:: {
 
-          val positionedPieceStream = {
-            val positions = Position.generatePositionsStream(startX, startY, board.width, board.height)
+            val positionedPieceStream = {
+              val positions = Position.generatePositionsStream(startX, startY, board.width, board.height)
 
-            PositionedPiece.generatePositionedPiecesStream(piece, positions)
+              PositionedPiece.generatePositionedPiecesStream(piece, positions)
+            }
+
+            generateBoards(board, positionedPieceStream, restOfPieces, bp, piecesOnBoard)
           }
-
-          generateBoards(board, positionedPieceStream, restOfPieces, bp, piecesOnBoard)
-          //}
         }
 
         case _ ⇒ {
@@ -82,7 +82,7 @@ object UniqueBoardsGenerator {
 
           //println(s"$positionedPiece is currently on board (collision), continuing...")
 
-          generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard)
+          None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard)
 
         } else {
           if (!bp.isBlacklisted(updatedPiecesOnBoard)) {
@@ -98,7 +98,7 @@ object UniqueBoardsGenerator {
               case Left(e) ⇒ {
                 //println(s"could not put $positionedPiece on board :/ ")
                 //bp.blacklist(piecesOnBoard, positionedPiece)
-                generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard)
+                None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard)
               }
 
               case Right(nextBoard) ⇒ {
@@ -117,9 +117,10 @@ object UniqueBoardsGenerator {
                 if (!restOfPositionedPieceStream.isEmpty && restOfPositionedPieceStream(0).piece == positionedPiece.piece) {
                   startX = positionedPiece.x
                   startY = positionedPiece.y
-                }*/
+                }
+                */
 
-                generateUniqueBoardsStream(nextBoard, startX, startY, restOfPieces, bp, updatedPiecesOnBoard) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard)
+                None #:: generateUniqueBoardsStream(nextBoard, startX, startY, restOfPieces, bp, updatedPiecesOnBoard) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard)
                 //generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard) ++: generateUniqueBoardsStream(nextBoard, startX, startY, restOfPieces, bp, updatedPiecesOnBoard)
               }
             }
@@ -127,7 +128,7 @@ object UniqueBoardsGenerator {
 
             //println(s"set ${updatedPiecesOnBoard.mkString(", ")} IS blacklisted ")
 
-            generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard)
+            None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard)
             //None #:: Stream.empty
 
             //None #:: Stream.empty

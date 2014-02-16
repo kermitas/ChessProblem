@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.board.path
 
 import as.chess.problem.piece.PositionedPiece
@@ -10,3 +11,4 @@ class MemoryBlacklistedPaths(boardWidth: Int, boardHeight: Int) extends Blacklis
     for (permutedPath ← path.permutations.toList; transformedPermutedPath ← pt.getPathTransformations(permutedPath)) getOrCreate(transformedPermutedPath)
   }
 }
+*/ 

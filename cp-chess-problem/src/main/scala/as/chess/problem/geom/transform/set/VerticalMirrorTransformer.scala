@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.geom.transform.set
 
 import scala.collection.{ Set ⇒ GenericSet }
@@ -9,3 +10,4 @@ class VerticalMirrorTransformer(val boardWidth: Int, val boardHeight: Int) exten
 
   def apply(set: GenericSet[PositionedPiece]): GenericSet[PositionedPiece] = set.map(pp ⇒ new PositionedPiece(vmt(pp.x, pp.y), pp.piece))
 }
+*/ 

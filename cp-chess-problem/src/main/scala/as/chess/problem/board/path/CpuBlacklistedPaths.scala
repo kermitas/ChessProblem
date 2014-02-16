@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.board.path
 
 import as.chess.problem.piece.PositionedPiece
@@ -16,3 +17,4 @@ class CpuBlacklistedPaths(boardWidth: Int, boardHeight: Int) extends Blacklisted
     getOrCreate(path)
   }
 }
+*/ 

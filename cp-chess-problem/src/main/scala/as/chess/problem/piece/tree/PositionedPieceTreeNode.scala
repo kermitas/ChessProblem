@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.piece.tree
 
 import scala.collection.mutable.TreeSet
@@ -49,7 +50,11 @@ class PositionedPieceTreeNode(val positionedPiece: PositionedPiece) extends Seri
     }
   }
 
+  def getPaths: List[GenericSet[PositionedPiece]] = List[GenericSet[PositionedPiece]]()
+
+  /*
   def getPaths: List[GenericSet[PositionedPiece]] = getPaths(scala.collection.mutable.TreeSet[PositionedPiece]()(new DistanceBasedPositionedPieceOrdering))
+
 
   protected def getPaths(abovePath: GenericSet[PositionedPiece]): List[GenericSet[PositionedPiece]] = {
 
@@ -68,4 +73,7 @@ class PositionedPieceTreeNode(val positionedPiece: PositionedPiece) extends Seri
       paths.toList
     }
   }
+  */
+
 }
+*/ 

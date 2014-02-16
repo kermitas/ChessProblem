@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.geom.transform.set
 
 import scala.collection.Set
@@ -17,3 +18,4 @@ object UniqueSetOfPositionedPiecesOrdering extends Ordering[Set[PositionedPiece]
     }
   }
 }
+*/ 

@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.geom.transform.path
 
 import as.chess.problem.piece.PositionedPiece
@@ -35,3 +36,4 @@ class PathTransformer(boardWidth: Int, boardHeight: Int) extends Serializable {
     paths.toList
   }
 }
+*/

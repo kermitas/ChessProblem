@@ -1,3 +1,4 @@
+/*
 package as.chess.problem.piece.tree
 
 import scala.collection.{ Set ⇒ GenericSet }
@@ -61,3 +62,4 @@ class BlacklistedSets(boardWidth: Int, boardHeight: Int) extends PositionedPiece
   }
 }
 
+*/ 

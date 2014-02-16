@@ -32,7 +32,7 @@ class TmpTest extends FeatureSpec with GivenWhenThen with Matchers {
     println(ts2)
     */
 
-    val treeSetBuilder: scala.collection.generic.CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]] = TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceOrdering)
+    val treeSetBuilder: scala.collection.generic.CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]] = TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceOrdering(3))
 
     var bl = new as.chess.problem.piece.set.BlacklistedSets(3, 3)(treeSetBuilder)
 
@@ -61,7 +61,7 @@ class TmpTest extends FeatureSpec with GivenWhenThen with Matchers {
 
     //val treeSetBuilder: scala.collection.generic.CanBuildFrom[scala.collection.immutable.TreeSet[PositionedPiece], PositionedPiece, scala.collection.immutable.TreeSet[PositionedPiece]] = scala.collection.immutable.TreeSet.newCanBuildFrom[PositionedPiece](new as.chess.problem.piece.set.DistanceBasedPositionedPieceOrdering)
 
-    var set5: scala.collection.immutable.TreeSet[PositionedPiece] = scala.collection.immutable.TreeSet[PositionedPiece](new PositionedPiece(1, 1, King.king))(new as.chess.problem.piece.set.DistanceBasedPositionedPieceOrdering)
+    var set5: scala.collection.immutable.TreeSet[PositionedPiece] = scala.collection.immutable.TreeSet[PositionedPiece](new PositionedPiece(1, 1, King.king))(new as.chess.problem.piece.set.DistanceBasedPositionedPieceOrdering(3))
     println(s"set5 = ${set5.mkString(", ")}")
 
     set5 = set5 + new PositionedPiece(0, 0, King.king)

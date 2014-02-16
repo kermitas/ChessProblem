@@ -5,7 +5,7 @@ import as.chess.problem.piece.PositionedPiece
 import as.chess.problem.geom.transform._
 import scala.collection.generic.CanBuildFrom
 
-class PathTransformer(boardWidth: Int, boardHeight: Int) extends Serializable {
+class PathTransformer(val boardWidth: Int, val boardHeight: Int) extends Serializable {
 
   val hmt = new HorizontalMirrorTransformer(boardWidth, boardHeight)
   val vmt = new VerticalMirrorTransformer(boardWidth, boardHeight)
