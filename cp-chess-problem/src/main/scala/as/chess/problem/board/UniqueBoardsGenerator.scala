@@ -1,23 +1,20 @@
 package as.chess.problem.board
 
 import scala.collection.immutable.TreeSet
-//import scala.collection.{ Set ⇒ GenericSet }
 import as.chess.problem.piece.{ PositionedPiece, Piece }
 import as.chess.problem.board.{ Board ⇒ ProblemBoard }
-//import as.chess.problem.piece.tree.BlacklistedSets
 import as.chess.problem.piece.set.MutableBlacklistedSets
 import as.chess.problem.geom.Position
-import as.chess.problem.piece.set.DistanceBasedPositionedPieceOrdering
-//import as.chess.problem.geom.transform.set2.UniqueSetOfPositionedPiecesOrdering
+import as.chess.problem.piece.set.DistanceBasedPositionedPieceInSetOrdering
 
 object UniqueBoardsGenerator {
 
   def generateUniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
 
-    val treeSetBuilder: scala.collection.generic.CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]] = TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceOrdering(board.height))
+    val treeSetBuilder: scala.collection.generic.CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]] = TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceInSetOrdering(board.height))
 
-    val bl = new MutableBlacklistedSets(board.width, board.height)(treeSetBuilder)
-    val piecesOnBoard = TreeSet[PositionedPiece]()(new DistanceBasedPositionedPieceOrdering(board.height))
+    val bl = new MutableBlacklistedSets(board.width, board.height, treeSetBuilder)
+    val piecesOnBoard = TreeSet[PositionedPiece]()(new DistanceBasedPositionedPieceInSetOrdering(board.height))
     generateUniqueBoardsStream(board, 0, 0, pieces, bl, piecesOnBoard)
   }
 
@@ -35,7 +32,6 @@ object UniqueBoardsGenerator {
 
             val positionedPieceStream = {
               val positions = Position.generatePositionsStream(startX, startY, board.width, board.height)
-
               PositionedPiece.generatePositionedPiecesStream(piece, positions)
             }
 
@@ -68,7 +64,6 @@ object UniqueBoardsGenerator {
 
         //println(s"B: taking first positionedPiece $positionedPiece and trying to put it, piecesOnBoard=${piecesOnBoard.mkString(", ")}")
 
-        // TODO sprawdzic, moze wystarczy tylko tutaj posaidac implicit buildera?
         val updatedPiecesOnBoard = piecesOnBoard + positionedPiece
 
         //var updatedPiecesOnBoard = TreeSet[PositionedPiece](positionedPiece)(new DistanceBasedPositionedPieceOrdering)
@@ -110,18 +105,39 @@ object UniqueBoardsGenerator {
                 //println(as.chess.problem.drawer.AsciiDrawer.draw(nextBoard))
                 //Thread.sleep(300)
 
+                /*
                 var startX = 0
                 var startY = 0
 
-                /*
-                if (!restOfPositionedPieceStream.isEmpty && restOfPositionedPieceStream(0).piece == positionedPiece.piece) {
-                  startX = positionedPiece.x
-                  startY = positionedPiece.y
+                if (!restOfPositionedPieceStream.isEmpty) {
+                  val nextPiece = restOfPositionedPieceStream(0).piece
+
+                  println(s"Next piece = $nextPiece, pieces currently on board: ${updatedPiecesOnBoard.mkString(", ")}")
+                  val filtered = updatedPiecesOnBoard.filter(pp ⇒ pp.piece == nextPiece)
+
+                  println(s"pieces currently on board filtered to only this in type of next piece : ${filtered.mkString(", ")}")
+
+                  filtered.lastOption match {
+                    case Some(lastPositionedPieceSameAsNextPiece) ⇒ {
+
+                      println(s"last one from filtered list: $lastPositionedPieceSameAsNextPiece")
+
+                      startX = lastPositionedPieceSameAsNextPiece.x
+                      startY = lastPositionedPieceSameAsNextPiece.y
+                    }
+                    case None ⇒
+                  }
                 }
                 */
 
-                None #:: generateUniqueBoardsStream(nextBoard, startX, startY, restOfPieces, bp, updatedPiecesOnBoard) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard)
-                //generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard) ++: generateUniqueBoardsStream(nextBoard, startX, startY, restOfPieces, bp, updatedPiecesOnBoard)
+                /*
+                if (!restOfPositionedPieceStream.isEmpty && restOfPositionedPieceStream(0).piece == positionedPiece.piece) {
+                  startX = positionedPiece.x + 1
+                  startY = positionedPiece.y
+                }*/
+
+                None #:: generateUniqueBoardsStream(nextBoard, 0, 0, restOfPieces, bp, updatedPiecesOnBoard) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard)
+                //None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, bp, piecesOnBoard) ++: generateUniqueBoardsStream(nextBoard, startX, startY, restOfPieces, bp, updatedPiecesOnBoard)
               }
             }
           } else {

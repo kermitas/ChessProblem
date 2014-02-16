@@ -1,12 +1,9 @@
-//import as.chess.problem.board.path.BlacklistedPaths
 import org.scalatest._
 
 import as.chess.problem.piece._
 import as.chess.problem.board.{ UniqueBoardsGenerator, Board }
 
 class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
-
-  //final val workMode = BlacklistedPaths.CpuWorkStrategy
 
   final val printBoards = false
 

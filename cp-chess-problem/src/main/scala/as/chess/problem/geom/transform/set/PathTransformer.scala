@@ -1,39 +1,37 @@
-/*
 package as.chess.problem.geom.transform.set
 
-import scala.collection.{ Set ⇒ GenericSet }
-import scala.collection.mutable.TreeSet
+import scala.collection.immutable.{ Set, TreeSet }
 import as.chess.problem.piece.PositionedPiece
 import as.chess.problem.geom.transform._
+import scala.collection.generic.CanBuildFrom
 
-class PathTransformer(boardWidth: Int, boardHeight: Int) extends Serializable {
+class PathTransformer(val boardWidth: Int, val boardHeight: Int) extends Serializable {
 
   val hmt = new HorizontalMirrorTransformer(boardWidth, boardHeight)
   val vmt = new VerticalMirrorTransformer(boardWidth, boardHeight)
   val vhmt = new VerticalAndHorizontalMirrorTransformer(boardWidth, boardHeight)
   val ct = new ClockwiseTransformer(boardWidth, boardHeight)
 
-  def getPathTransformations(set: GenericSet[PositionedPiece]): TreeSet[GenericSet[PositionedPiece]] = {
+  def getPathTransformations(set: Set[PositionedPiece])(setBuilder: CanBuildFrom[Set[PositionedPiece], PositionedPiece, Set[PositionedPiece]]): Set[Set[PositionedPiece]] = {
 
-    val paths = new TreeSet[GenericSet[PositionedPiece]]()(UniqueSetOfPositionedPiecesOrdering)
+    var paths = new TreeSet[Set[PositionedPiece]]()(new UniqueSetOfPositionedPiecesOrdering)
 
-    def addWithVerticalMirroring(set: GenericSet[PositionedPiece]) {
-      paths += set
-      paths += vmt(set)
+    def addWithVerticalMirroring(set: Set[PositionedPiece]) {
+      paths = paths + set
+      paths = paths + vmt(set)(setBuilder)
     }
 
     addWithVerticalMirroring(set)
 
     if (boardWidth == boardHeight) {
-      addWithVerticalMirroring(ct(set, ClockwiseQuadrantRotation90))
-      addWithVerticalMirroring(ct(set, ClockwiseQuadrantRotation180))
-      addWithVerticalMirroring(ct(set, ClockwiseQuadrantRotation270))
+      addWithVerticalMirroring(ct(set, ClockwiseQuadrantRotation90)(setBuilder))
+      addWithVerticalMirroring(ct(set, ClockwiseQuadrantRotation180)(setBuilder))
+      addWithVerticalMirroring(ct(set, ClockwiseQuadrantRotation270)(setBuilder))
     } else {
-      paths += hmt(set)
-      paths += vhmt(set)
+      paths = paths + hmt(set)(setBuilder)
+      paths = paths + vhmt(set)(setBuilder)
     }
 
     paths
   }
 }
-*/ 

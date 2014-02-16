@@ -61,7 +61,7 @@ class AcceptedBoardsFilePublisher(commandLineArguments: Array[String], config: C
     case Messages.AccumulatedAcceptedBoards(results) ⇒ {
 
       val stopTime = System.currentTimeMillis
-      bufferedWriter.append(s"===== All $acceptedResultsCount chess boards were written in ${stopTime - startTime}ms, stop time ${stopTime}ms, goodbye! =====")
+      bufferedWriter.append(s"===== All $acceptedResultsCount chess boards were written in ${stopTime - startTime}ms, stop time ${stopTime}ms. =====")
       bufferedWriter.newLine()
 
       try { bufferedWriter.close } catch { case e: Exception ⇒ }

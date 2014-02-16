@@ -1,9 +1,10 @@
-import as.chess.problem.piece.set.DistanceBasedPositionedPieceOrdering
+import as.chess.problem.piece.set.DistanceBasedPositionedPieceInSetOrdering
 import as.chess.problem.piece.{ Rook, Queen, King, PositionedPiece }
 import org.scalatest._
 import scala.collection.immutable.TreeSet
+import as.chess.problem.piece.set.DistanceBasedPositionedPieceInSetOrdering
 
-class TmpTest extends FeatureSpec with GivenWhenThen with Matchers {
+class AbcTest extends FeatureSpec with GivenWhenThen with Matchers {
 
   scenario("abc", AbcTestTag) {
     abc
@@ -32,9 +33,9 @@ class TmpTest extends FeatureSpec with GivenWhenThen with Matchers {
     println(ts2)
     */
 
-    val treeSetBuilder: scala.collection.generic.CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]] = TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceOrdering(3))
+    val treeSetBuilder: scala.collection.generic.CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]] = TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceInSetOrdering(3))
 
-    var bl = new as.chess.problem.piece.set.BlacklistedSets(3, 3)(treeSetBuilder)
+    var bl = new as.chess.problem.piece.set.ImmutableBlacklistedSets(3, 3, treeSetBuilder)
 
     val set1 = scala.collection.immutable.Set[PositionedPiece]()
 
@@ -61,7 +62,7 @@ class TmpTest extends FeatureSpec with GivenWhenThen with Matchers {
 
     //val treeSetBuilder: scala.collection.generic.CanBuildFrom[scala.collection.immutable.TreeSet[PositionedPiece], PositionedPiece, scala.collection.immutable.TreeSet[PositionedPiece]] = scala.collection.immutable.TreeSet.newCanBuildFrom[PositionedPiece](new as.chess.problem.piece.set.DistanceBasedPositionedPieceOrdering)
 
-    var set5: scala.collection.immutable.TreeSet[PositionedPiece] = scala.collection.immutable.TreeSet[PositionedPiece](new PositionedPiece(1, 1, King.king))(new as.chess.problem.piece.set.DistanceBasedPositionedPieceOrdering(3))
+    var set5: scala.collection.immutable.TreeSet[PositionedPiece] = scala.collection.immutable.TreeSet[PositionedPiece](new PositionedPiece(1, 1, King.king))(new DistanceBasedPositionedPieceInSetOrdering(3))
     println(s"set5 = ${set5.mkString(", ")}")
 
     set5 = set5 + new PositionedPiece(0, 0, King.king)
