@@ -7,25 +7,11 @@ import as.chess.problem.board.Board
 import as.ama.startup._
 import com.typesafe.config.Config
 import as.ama.addon.lifecycle.LifecycleListener
-//import as.chess.problem.board.path.BlacklistedPaths
-
-/*
-object UniqueBoardsGenerator {
-  final val workStrategyConfigKey = "workStrategy"
-}
-*/
 
 class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
-  //import UniqueBoardsGenerator._
-
-  //protected var workStrategy: BlacklistedPaths.WorkStrategy = _
-
   override def preStart() {
     try {
-
-      //workStrategy = BlacklistedPaths.getWorkStrategy(config.getString(workStrategyConfigKey))
-
       broadcaster ! new Broadcaster.Register(self, new UniqueBoardsGeneratorClassifier)
 
       broadcaster ! new InitializationResult(Right(None))

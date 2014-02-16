@@ -28,7 +28,7 @@ object Board {
   }
 
   /**
-   * Rules (on the left current field value):
+   * Rules (on the left: current field value, on the right: behaviour):
    * - Empty field => on this board we should have Safe fields in place of Empty (but if found then behave as Safe)
    * - Safe field => allow to put Occupied OR Safe OR Unsafe
    * - Unsafe field => allow to put Safe, Unsafe
@@ -82,22 +82,12 @@ class Board(array: Array[Array[ClassicField[ClassicPiece]]]) extends ClassicBoar
   }
 
   def equals(b: Board): Boolean = {
-    val result = if (width == b.width && height == b.height) {
+    if (width == b.width && height == b.height) {
       (0 until height).find { y ⇒
         (0 until width).find { x ⇒
-          //!array(y)(x).equals(b.array(y)(x))
 
           val f1 = array(y)(x)
           val f2 = b.array(y)(x)
-
-          //val result =
-
-          /*
-          val bo = if (f1.isInstanceOf[Occupied[_]] && f2.isInstanceOf[Occupied[_]])
-            f1.equals(f2)
-          else
-            false
-          */
 
           val isO1 = f1.isInstanceOf[Occupied[_]]
           val isO2 = f2.isInstanceOf[Occupied[_]]
@@ -109,22 +99,12 @@ class Board(array: Array[Array[ClassicField[ClassicPiece]]]) extends ClassicBoar
           else
             true
 
-          //!result
-
-          //println(s"$f1 $f2 $bo")
-
           !bo
         }.isDefined
       }.isEmpty
     } else {
       false
     }
-
-    //println(as.chess.problem.drawer.AsciiDrawer.draw(this.asInstanceOf[as.chess.problem.board.Board]))
-    //println(as.chess.problem.drawer.AsciiDrawer.draw(b.asInstanceOf[as.chess.problem.board.Board]))
-    //println(s"========= $result")
-
-    result
   }
 
   def mirrorHorizontally: Board = {

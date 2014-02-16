@@ -24,7 +24,7 @@ object AsciiDrawer {
 
       for (x ← 0 until b.width) {
 
-        // look out! use of bare array! if you don't want this use: b.get(x, y) match{ Left, Right}
+        // Look out! Use of bare array! If you don't want this use: b.get(x, y) match{ Left, Right }, see commented code below.
         b.getArray(y)(x) match {
 
           case o: Occupied[_] ⇒ o.piece match {

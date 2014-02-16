@@ -7,5 +7,5 @@ class HorizontalMirrorTransformer(val boardWidth: Int, val boardHeight: Int) ext
 
   val hmt = new as.chess.problem.geom.transform.point.HorizontalMirrorTransformer(boardWidth, boardHeight)
 
-  def apply(set: Set[PositionedPiece])(setBuilder: CanBuildFrom[Set[PositionedPiece], PositionedPiece, Set[PositionedPiece]]): Set[PositionedPiece] = set.map(pp ⇒ new PositionedPiece(hmt(pp.x, pp.y), pp.piece))(setBuilder)
+  def apply(set: Set[PositionedPiece], setBuilder: CanBuildFrom[Set[PositionedPiece], PositionedPiece, Set[PositionedPiece]]): Set[PositionedPiece] = set.map(pp ⇒ new PositionedPiece(hmt(pp.x, pp.y), pp.piece))(setBuilder)
 }

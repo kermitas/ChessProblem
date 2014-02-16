@@ -7,6 +7,3 @@ object BigQueensTestTag extends Tag("BigQueensTest")
 object BigBoardsTestTag extends Tag("BigBoardsTest")
 
 object SmallBoardsWithPermutedPiecesTestTag extends Tag("SmallBoardsWithPermutedPiecesTest")
-
-object AbcTestTag extends Tag("AbcTest")
-
