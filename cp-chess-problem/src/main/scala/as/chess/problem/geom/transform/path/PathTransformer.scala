@@ -34,5 +34,4 @@ class PathTransformer(boardWidth: Int, boardHeight: Int) extends Serializable {
 
     paths.toList
   }
-
 }
