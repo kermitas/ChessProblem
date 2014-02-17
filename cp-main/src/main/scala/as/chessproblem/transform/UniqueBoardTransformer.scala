@@ -1,5 +1,7 @@
 package as.chessproblem.transform
 
+import scala.collection.GenSeq
+import scala.collection.parallel.mutable.ParArray
 import akka.actor._
 import as.akka.broadcaster.Broadcaster
 import as.ama.startup.InitializationResult
@@ -32,12 +34,12 @@ class UniqueBoardTransformer(commandLineArguments: Array[String], config: Config
     case message ⇒ log.warning(s"Unhandled $message send by ${sender()}")
   }
 
-  protected def boardTransformer(board: Board): Seq[Board] = {
+  protected def boardTransformer(board: Board): GenSeq[Board] = {
 
-    val uniqueBoards = new scala.collection.mutable.ListBuffer[Board]
+    var uniqueBoards = ParArray[Board]()
 
     def addIfUnique(board: Board) {
-      if (uniqueBoards.find(_.equals(board)).isEmpty) uniqueBoards += board
+      uniqueBoards.find(_.equals(board)).getOrElse(uniqueBoards = uniqueBoards :+ board)
     }
 
     def addWithVerticalMirroring(board: Board) {

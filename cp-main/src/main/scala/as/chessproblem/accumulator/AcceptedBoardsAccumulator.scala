@@ -1,5 +1,6 @@
 package as.chessproblem.accumulator
 
+import scala.collection.mutable.ListBuffer
 import akka.actor.{ ActorRef, ActorLogging, Actor }
 import as.akka.broadcaster._
 import as.chessproblem.Messages
@@ -9,7 +10,7 @@ import com.typesafe.config.Config
 
 class AcceptedBoardsAccumulator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
-  protected val acceptedBoards = new scala.collection.mutable.ListBuffer[ProblemBoard]
+  protected val acceptedBoards = new ListBuffer[ProblemBoard]
 
   override def preStart() {
     try {

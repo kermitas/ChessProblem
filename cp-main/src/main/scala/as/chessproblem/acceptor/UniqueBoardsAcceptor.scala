@@ -1,5 +1,6 @@
 package as.chessproblem.acceptor
 
+import scala.collection.parallel.mutable.ParArray
 import akka.actor._
 import as.akka.broadcaster._
 import as.chessproblem.Messages
@@ -9,7 +10,7 @@ import com.typesafe.config.Config
 
 class UniqueBoardsAcceptor(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
-  protected var collectedUniqueResults = scala.collection.parallel.mutable.ParArray[ProblemBoard]()
+  protected var collectedUniqueResults = ParArray[ProblemBoard]()
 
   override def preStart() {
     try {

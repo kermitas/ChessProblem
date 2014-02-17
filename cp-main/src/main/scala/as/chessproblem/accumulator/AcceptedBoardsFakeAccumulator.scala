@@ -1,5 +1,6 @@
 package as.chessproblem.accumulator
 
+import scala.collection.mutable.ListBuffer
 import akka.actor._
 import as.akka.broadcaster._
 import as.chessproblem.Messages
@@ -25,7 +26,7 @@ class AcceptedBoardsFakeAccumulator(commandLineArguments: Array[String], config:
     case Messages.AcceptedBoard(board) ⇒
 
     case Messages.BoardsAcceptiationFinished ⇒ {
-      broadcaster ! new Messages.AccumulatedAcceptedBoards(new scala.collection.mutable.ListBuffer[ProblemBoard])
+      broadcaster ! new Messages.AccumulatedAcceptedBoards(new ListBuffer[ProblemBoard])
       context.stop(self)
     }
 

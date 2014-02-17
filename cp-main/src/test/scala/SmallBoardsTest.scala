@@ -136,5 +136,4 @@ class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     Then("result should be 6 unique board")
     boardsStream.filter(_.isDefined).size should be(6)
   }
-
 }

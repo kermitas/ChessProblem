@@ -3,7 +3,7 @@ package as.chess.problem.board
 import scala.collection.immutable.TreeSet
 import as.chess.problem.piece.{ PositionedPiece, Piece }
 import as.chess.problem.board.{ Board ⇒ ProblemBoard }
-import as.chess.problem.piece.set.MutableBlacklistedSets
+import as.chess.problem.piece.set2.MutableBlacklistedSets
 import as.chess.problem.geom.Position
 import as.chess.problem.piece.set.DistanceBasedPositionedPieceInSetOrdering
 
@@ -55,6 +55,8 @@ object UniqueBoardsGenerator {
         val updatedPiecesOnBoard = piecesOnBoard + positionedPiece
 
         if (updatedPiecesOnBoard.size == piecesOnBoard.size) {
+          // positionedPiece was not added to piecesOnBoard set - can be caused by collision
+          // for example: there is [(0,0) King] on the board and we are trying to add next one [(0,0) King]
 
           None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, mbs, piecesOnBoard)
 
@@ -72,7 +74,7 @@ object UniqueBoardsGenerator {
                 mbs.blacklist(piecesOnBoard, positionedPiece)
 
                 None #:: generateUniqueBoardsStream(nextBoard, 0, 0, restOfPieces, mbs, updatedPiecesOnBoard) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces, mbs, piecesOnBoard)
-                //None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, mbs, piecesOnBoard) ++: generateUniqueBoardsStream(nextBoard, startX, startY, restOfPieces, mbs, updatedPiecesOnBoard)
+                //None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, mbs, piecesOnBoard) ++: generateUniqueBoardsStream(nextBoard, 0, 0, restOfPieces, mbs, updatedPiecesOnBoard)
               }
             }
           } else {
