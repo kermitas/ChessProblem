@@ -13,10 +13,9 @@ class UniqueBoardsGenerator(commandLineArguments: Array[String], config: Config,
   override def preStart() {
     try {
       broadcaster ! new Broadcaster.Register(self, new UniqueBoardsGeneratorClassifier)
-
       broadcaster ! new InitializationResult(Right(None))
     } catch {
-      case e: Exception ⇒ broadcaster ! new InitializationResult(Left(new Exception("Problem while installing boards generator.", e)))
+      case e: Exception ⇒ broadcaster ! new InitializationResult(Left(new Exception("Problem while installing unique boards generator.", e)))
     }
   }
 

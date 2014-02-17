@@ -3,7 +3,7 @@ package as.chess.problem.board
 import scala.collection.immutable.TreeSet
 import as.chess.problem.piece.{ PositionedPiece, Piece }
 import as.chess.problem.board.{ Board ⇒ ProblemBoard }
-import as.chess.problem.piece.set2.MutableBlacklistedSets
+import as.chess.problem.piece.set2.MutableBlacklistedSets3
 import as.chess.problem.geom.Position
 import as.chess.problem.piece.set.DistanceBasedPositionedPieceInSetOrdering
 
@@ -12,13 +12,13 @@ object UniqueBoardsGenerator {
   def generateUniqueBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
 
     val treeSetBuilder: scala.collection.generic.CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]] = TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceInSetOrdering(board.height))
-    val mbs = new MutableBlacklistedSets(board.width, board.height, treeSetBuilder)
+    val mbs = new MutableBlacklistedSets3(board.width, board.height, treeSetBuilder)
     val piecesOnBoard = TreeSet[PositionedPiece]()(new DistanceBasedPositionedPieceInSetOrdering(board.height))
 
     generateUniqueBoardsStream(board, 0, 0, pieces, mbs, piecesOnBoard)
   }
 
-  def generateUniqueBoardsStream(board: ProblemBoard, startX: Int, startY: Int, pieces: Stream[Piece], mbs: MutableBlacklistedSets, piecesOnBoard: TreeSet[PositionedPiece]): Stream[Option[ProblemBoard]] = {
+  def generateUniqueBoardsStream(board: ProblemBoard, startX: Int, startY: Int, pieces: Stream[Piece], mbs: MutableBlacklistedSets3, piecesOnBoard: TreeSet[PositionedPiece]): Stream[Option[ProblemBoard]] = {
 
     if (board.getSafeFieldsCount >= pieces.length) {
 
@@ -46,7 +46,7 @@ object UniqueBoardsGenerator {
     }
   }
 
-  def generateBoards(board: ProblemBoard, positionedPieceStream: Stream[PositionedPiece], restOfPieces: Stream[Piece], mbs: MutableBlacklistedSets, piecesOnBoard: TreeSet[PositionedPiece]): Stream[Option[ProblemBoard]] = {
+  def generateBoards(board: ProblemBoard, positionedPieceStream: Stream[PositionedPiece], restOfPieces: Stream[Piece], mbs: MutableBlacklistedSets3, piecesOnBoard: TreeSet[PositionedPiece]): Stream[Option[ProblemBoard]] = {
 
     positionedPieceStream match {
 
@@ -62,6 +62,8 @@ object UniqueBoardsGenerator {
 
         } else {
           if (!mbs.isBlacklisted(updatedPiecesOnBoard)) {
+
+            //mbs.blacklist(piecesOnBoard, positionedPiece)
 
             board.put(positionedPiece.x, positionedPiece.y, positionedPiece.piece) match {
 

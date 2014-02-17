@@ -14,9 +14,7 @@ class MutableBlacklistedSets(val pt: PathTransformer, var sets: ParArray[Set[Pos
   def this(boardWidth: Int, boardHeight: Int, treeSetBuilder: CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]]) = this(new PathTransformer(boardWidth, boardHeight), ParArray[Set[PositionedPiece]](), treeSetBuilder)
 
   def isBlacklisted(set: Set[PositionedPiece]): Boolean = {
-    //sets.find { s ⇒ s.size == set.size && set.subsetOf(s) }.isDefined
-
-    sets.find { s ⇒ set.subsetOf(s) }.isDefined
+    sets.find { s ⇒ s.size == set.size && set.subsetOf(s) }.isDefined
   }
 
   def blacklist(set: Set[PositionedPiece], positionedPiece: PositionedPiece) {
