@@ -15,7 +15,8 @@ class MutableBlacklistedSets2(val pt: PathTransformer, var sets: ParArray[Set[Po
 
   def isBlacklisted(set: Set[PositionedPiece]): Boolean = {
     pt.getPathTransformations(set, setBuilder).find { transformedSet ⇒
-      sets.find(s ⇒ s.size == transformedSet.size && transformedSet.subsetOf(s)).isDefined
+      //sets.find(s ⇒ s.size == transformedSet.size && transformedSet.subsetOf(s)).isDefined
+      sets.find(s ⇒ transformedSet.subsetOf(s)).isDefined
     }.isDefined
   }
 
