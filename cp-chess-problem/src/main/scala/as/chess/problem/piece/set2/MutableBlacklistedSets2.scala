@@ -7,18 +7,21 @@ import as.chess.problem.piece.PositionedPiece
 import as.chess.problem.geom.transform.set.PathTransformer
 import scala.collection.generic.CanBuildFrom
 
-class MutableBlacklistedSets(val pt: PathTransformer, var sets: ParArray[Set[PositionedPiece]], treeSetBuilder: CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]]) {
+class MutableBlacklistedSets2(val pt: PathTransformer, var sets: ParArray[Set[PositionedPiece]], treeSetBuilder: CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]]) {
 
   val setBuilder = treeSetBuilder.asInstanceOf[CanBuildFrom[Set[PositionedPiece], PositionedPiece, Set[PositionedPiece]]]
 
   def this(boardWidth: Int, boardHeight: Int, treeSetBuilder: CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]]) = this(new PathTransformer(boardWidth, boardHeight), ParArray[Set[PositionedPiece]](), treeSetBuilder)
 
-  def isBlacklisted(set: Set[PositionedPiece]): Boolean = sets.find { s ⇒ s.size == set.size && set.subsetOf(s) }.isDefined
+  def isBlacklisted(set: Set[PositionedPiece]): Boolean = {
+    pt.getPathTransformations(set, setBuilder).find { transformedSet ⇒
+      sets.find(s ⇒ s.size == transformedSet.size && transformedSet.subsetOf(s)).isDefined
+    }.isDefined
+  }
 
   def blacklist(set: Set[PositionedPiece], positionedPiece: PositionedPiece) {
-    for (transformedSet ← pt.getPathTransformations(set + positionedPiece, setBuilder)) {
-      sets.find(s ⇒ s.size == transformedSet.size && transformedSet.subsetOf(s)).getOrElse { sets = sets :+ transformedSet }
-    }
+    val setToAdd = set + positionedPiece
+    sets.find(s ⇒ s.size == setToAdd.size && setToAdd.subsetOf(s)).getOrElse { sets = sets :+ setToAdd }
   }
 
   def generateReport: String = generateReport(sets)
