@@ -6,6 +6,11 @@ import as.ama.addon.lifecycle.LifecycleListener
 import as.chessproblem.Messages
 import as.akka.broadcaster.Broadcaster
 
+/**
+ * Pulls all boards from non blocking stream (Stream[Option[Board]])
+ *
+ * Die after reach end of the stream.
+ */
 object BoardsGeneratorWorker {
   def props(broadcaster: ActorRef): Props = Props(new BoardsGeneratorWorker(broadcaster))
 }

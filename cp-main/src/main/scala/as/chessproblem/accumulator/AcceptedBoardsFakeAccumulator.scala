@@ -4,10 +4,13 @@ import scala.collection.mutable.ListBuffer
 import akka.actor._
 import as.akka.broadcaster._
 import as.chessproblem.Messages
-import as.chess.problem.board.{ Board ⇒ ProblemBoard }
+import as.chess.problem.board.Board
 import as.ama.startup.InitializationResult
 import com.typesafe.config.Config
 
+/**
+ * Does not do any accumulation. Simply sends AccumulatedAcceptedBoards with empty list after receiving BoardsAcceptationFinished.
+ */
 class AcceptedBoardsFakeAccumulator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   override def preStart() {
@@ -25,8 +28,8 @@ class AcceptedBoardsFakeAccumulator(commandLineArguments: Array[String], config:
 
     case Messages.AcceptedBoard(board) ⇒
 
-    case Messages.BoardsAcceptiationFinished ⇒ {
-      broadcaster ! new Messages.AccumulatedAcceptedBoards(new ListBuffer[ProblemBoard])
+    case Messages.BoardsAcceptationFinished ⇒ {
+      broadcaster ! new Messages.AccumulatedAcceptedBoards(new ListBuffer[Board])
       context.stop(self)
     }
 

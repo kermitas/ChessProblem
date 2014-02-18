@@ -4,13 +4,20 @@ import scala.collection.parallel.mutable.ParArray
 import akka.actor._
 import as.akka.broadcaster._
 import as.chessproblem.Messages
-import as.chess.problem.board.{ Board ⇒ ProblemBoard }
+import as.chess.problem.board.Board
 import as.ama.startup._
 import com.typesafe.config.Config
 
+/**
+ * Accepts only unique boards.
+ *
+ * To do that it first accumulate all previously produced boards. Then if next one comes it looks if it is unique or duplicate.
+ *
+ * Look out! Not efficient if many boards are produced.
+ */
 class UniqueBoardsAcceptor(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
-  protected var collectedUniqueResults = ParArray[ProblemBoard]()
+  protected var collectedUniqueResults = ParArray[Board]()
 
   override def preStart() {
     try {
@@ -33,7 +40,7 @@ class UniqueBoardsAcceptor(commandLineArguments: Array[String], config: Config, 
     }
 
     case Messages.AllBoardsWereGenerated ⇒ {
-      broadcaster ! Messages.BoardsAcceptiationFinished
+      broadcaster ! Messages.BoardsAcceptationFinished
       context.stop(self)
     }
 

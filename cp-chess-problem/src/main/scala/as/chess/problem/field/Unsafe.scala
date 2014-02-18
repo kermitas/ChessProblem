@@ -7,5 +7,5 @@ object Unsafe {
 }
 
 class Unsafe protected extends Empty {
-  override def equals(field: Field[_]): Boolean = field == Unsafe.unsafe //field.isInstanceOf[Unsafe]
+  override def equals(field: Field[_]): Boolean = field == Unsafe.unsafe
 }

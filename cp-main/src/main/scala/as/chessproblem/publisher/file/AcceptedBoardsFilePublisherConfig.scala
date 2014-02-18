@@ -17,6 +17,9 @@ object AcceptedBoardsFilePublisherConfig {
   final val appendConfigKey = "append"
   final val bufferSizeInBytesConfigKey = "bufferSizeInBytes"
 
+  /**
+   * Parsing configuration.
+   */
   def apply(config: Config): AcceptedBoardsFilePublisherConfig = {
 
     val asciiDefinitions = {
@@ -41,4 +44,7 @@ object AcceptedBoardsFilePublisherConfig {
   }
 }
 
+/**
+ * Configuration read from JSON (HOCON) file (by Typesafe Config library)
+ */
 case class AcceptedBoardsFilePublisherConfig(asciiDefinitions: AsciiDefinitions, file: String, append: Boolean, bufferSizeInBytes: Int)

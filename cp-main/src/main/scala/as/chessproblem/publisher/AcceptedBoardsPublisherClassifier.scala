@@ -5,5 +5,12 @@ import akka.actor.ActorRef
 import as.chessproblem.Messages
 
 class AcceptedBoardsPublisherClassifier extends Classifier {
-  override def map(message: Any, sender: ActorRef) = if (message.isInstanceOf[Messages.AcceptedBoard] || message.isInstanceOf[Messages.AccumulatedAcceptedBoards] || message.isInstanceOf[Messages.ProblemSettings]) Some(message) else None
+
+  override def map(message: Any, sender: ActorRef) = message match {
+    case ab: Messages.AcceptedBoard              ⇒ Some(ab)
+    case aab: Messages.AccumulatedAcceptedBoards ⇒ Some(aab)
+    case ps: Messages.ProblemSettings            ⇒ Some(ps)
+    case _                                       ⇒ None
+  }
+
 }

@@ -13,6 +13,9 @@ object ProcessController {
   final val shutdownOnAllBoardsSavedConfigKey = "shutdownOnAllBoardsSaved"
 }
 
+/**
+ * Will shutdown system on AcceptedBoardsWerePublishedToFile or AcceptedBoardsWerePublishedToLog or InputStreamText.
+ */
 class ProcessController(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   import ProcessController._
@@ -51,15 +54,6 @@ class ProcessController(commandLineArguments: Array[String], config: Config, bro
 
   protected def shutdownOnWorkDone {
     broadcaster ! new LifecycleListener.ShutdownSystem(Right(s"Work done, bye!"))
-
-    /*
-    import scala.language.postfixOps
-    import scala.concurrent.duration._
-    log.info(s"Received ${Messages.ResultsWerePublished.getClass.getSimpleName}, schedule ${classOf[AmaMessages.ShutdownSystem].getSimpleName} message")
-    val message = new AmaMessages.ShutdownSystem(Right(s"Work done, bye!"))
-    context.system.scheduler.scheduleOnce(30 seconds, broadcaster, message)(context.dispatcher)
-    */
-
     context.stop(self)
   }
 }

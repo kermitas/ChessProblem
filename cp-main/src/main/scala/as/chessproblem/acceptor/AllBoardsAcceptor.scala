@@ -6,6 +6,9 @@ import as.chessproblem.Messages
 import as.ama.startup._
 import com.typesafe.config.Config
 
+/**
+ * Simply accepts all boards.
+ */
 class AllBoardsAcceptor(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   override def preStart() {
@@ -24,7 +27,7 @@ class AllBoardsAcceptor(commandLineArguments: Array[String], config: Config, bro
     case Messages.GeneratedBoard(board) ⇒ broadcaster ! new Messages.AcceptedBoard(board)
 
     case Messages.AllBoardsWereGenerated ⇒ {
-      broadcaster ! Messages.BoardsAcceptiationFinished
+      broadcaster ! Messages.BoardsAcceptationFinished
       context.stop(self)
     }
 

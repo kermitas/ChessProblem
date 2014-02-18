@@ -11,13 +11,11 @@ object LightFlyer {
 /**
  * Piece just for testing purposes.
  *
- * It does not take/hit any other piece.
+ * Has no power to take/hit other piece.
  */
 class LightFlyer protected extends ClassicPiece with Piece {
 
   override def getUnsafeFieldsForPosition(x: Int, y: Int, width: Int, height: Int): Stream[(Int, Int, FieldTranslator)] = Stream.empty
-
-  override def equals(piece: ClassicPiece): Boolean = piece == LightFlyer.lightFlyer
 
   override def toString = getClass.getSimpleName
 }

@@ -24,7 +24,7 @@ object AsciiDrawer {
 
       for (x ← 0 until b.width) {
 
-        // Look out! Use of bare array! If you don't want this use: b.get(x, y) match{ Left, Right }, see commented code below.
+        // Look out! Use of bare array! If you don't want this better use: b.get(x, y) match{ Left, Right }.
         b.getArray(y)(x) match {
 
           case o: Occupied[_] ⇒ o.piece match {
@@ -54,50 +54,4 @@ object AsciiDrawer {
 
     sb.toString
   }
-
-  /*
-  def draw(b: Board, safe: String, unsafe: String, empty: String): String = {
-    val sb = new StringBuilder
-
-    sb.append(System.lineSeparator)
-    for (x ← 0 until b.width) sb.append("+----")
-    sb.append("+").append(System.lineSeparator)
-
-    for (y ← 0 until b.height) {
-      sb.append("|")
-
-      for (x ← 0 until b.width) {
-        b.get(x, y) match {
-
-          case Left(e) ⇒
-
-          case Right(field) ⇒ field match {
-            case o: Occupied[_] ⇒ o.piece match {
-              case King.king     ⇒ sb.append(" Ki ")
-              case Queen.queen   ⇒ sb.append(" Q  ")
-              case Rook.rook     ⇒ sb.append(" R  ")
-              case Bishop.bishop ⇒ sb.append(" B  ")
-              case Knight.knight ⇒ sb.append(" Kn ")
-            }
-
-            case Safe.safe     ⇒ sb.append(safe)
-
-            case Unsafe.unsafe ⇒ sb.append(unsafe)
-
-            case Empty.empty   ⇒ sb.append(empty)
-          }
-        }
-
-        sb.append("|")
-      }
-
-      sb.append(System.lineSeparator)
-
-      for (x ← 0 until b.width) sb.append("+----")
-      sb.append("+").append(System.lineSeparator)
-    }
-
-    sb.toString
-  }
-  */
 }

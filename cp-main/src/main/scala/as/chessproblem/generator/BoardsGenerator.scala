@@ -12,6 +12,9 @@ object BoardsGenerator {
   final val parallelProcessingFactorConfigKey = "parallelProcessingFactor"
 }
 
+/**
+ * After receiving ProblemSettings will prepare board streams and start workers (that will pull those streams)
+ */
 class BoardsGenerator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   import BoardsGenerator._
@@ -48,6 +51,7 @@ class BoardsGenerator(commandLineArguments: Array[String], config: Config, broad
       }
     }
 
+    /* If all our children died that means that all boards were generated.*/
     case Terminated(diedActor) ⇒ {
       if (context.children.isEmpty) {
         broadcaster ! Messages.AllBoardsWereGenerated

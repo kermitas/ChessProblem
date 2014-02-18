@@ -4,8 +4,15 @@ import as.chess.classic.field._
 import as.chess.classic.piece.Piece
 
 object Board {
+
+  /**
+   * Parse command line arguments and create board.
+   */
   def apply(commandLineArguments: Array[String], startIndex: Int) = new Board(Integer.parseInt(commandLineArguments(startIndex)), Integer.parseInt(commandLineArguments(startIndex + 1)))
 
+  /**
+   * Just an marker field. See put method for usage.
+   */
   case class SpecialFieldThatIsOutsideOfBoard(width: Int, height: Int) extends Field[Piece] {
     override def equals(field: Field[_]): Boolean = field.isInstanceOf[SpecialFieldThatIsOutsideOfBoard]
   }
@@ -23,7 +30,7 @@ object Board {
   }
 
   /**
-   * Rules (on the left current field value):
+   * Rules (on the left: current field value, on the right: behaviour):
    * - bad x,y => exception
    * - Empty field => allow to put Occupied
    * - Occupied field => does not allow to put anything
@@ -31,6 +38,32 @@ object Board {
   def getFieldTranslatorsForThisBoard(fieldThatWillBePut: Field[Piece]): FieldTranslator = fieldIsOutsideBoard orElse fieldIsOccupied orElse fieldToPut(fieldThatWillBePut)
 }
 
+/**
+ * ---------------------
+ * Board geometry:
+ *
+ * +----+----+----+
+ * | ~~ | ~~ | ~~ |
+ * +----+----+----+
+ * | ~~ | Ki | ~~ |
+ * +----+----+----+
+ * | ~~ | ~~ | ~~ |
+ * +----+----+----+
+ *
+ * Above board has King on (1,1). Rest of fields is marked as unsafe.
+ *
+ * +----+----+----+
+ * | Ki | ~~ |    |
+ * +----+----+----+
+ * | ~~ | ~~ |    |
+ * +----+----+----+
+ * |    |    |    |
+ * +----+----+----+
+ *
+ * Above board has King on (0,0). Fields (1,0), (0,1) and (1,1) are marked as unsafe. Rest of fields is empty.
+ *
+ * ---------------------
+ */
 class Board(protected val array: Array[Array[Field[Piece]]]) extends Serializable {
 
   import Board._
@@ -98,6 +131,10 @@ class Board(protected val array: Array[Array[Field[Piece]]]) extends Serializabl
     }
   }
 
+  /**
+   * If (x,y) is outside of board instance of SpecialFieldThatIsOutsideOfBoard will be passed in LocatedField
+   * to singleFieldCreator to indicate this situation.
+   */
   def put(x: Int, y: Int, singleFieldCreator: FieldTranslator): Either[Exception, Board] = {
 
     val currentField = if (isValidBoardPosition(x, y))
@@ -117,7 +154,33 @@ class Board(protected val array: Array[Array[Field[Piece]]]) extends Serializabl
     }
   }
 
-  def equals(b: Board): Boolean = throw new RuntimeException("Noo!")
+  def equals(b: Board): Boolean = {
+    if (width == b.width && height == b.height) {
+      (0 until height).find { y ⇒
+        (0 until width).find { x ⇒
+
+          val f1 = array(y)(x)
+          val f2 = b.array(y)(x)
+
+          val isO1 = f1.isInstanceOf[Occupied[_]]
+          val isO2 = f2.isInstanceOf[Occupied[_]]
+
+          val r = if (isO1 && isO2)
+            f1.equals(f2)
+          else if (isO1 || isO2)
+            false
+          else
+            true
+
+          !r
+        }.isDefined
+      }.isEmpty
+    } else {
+      false
+    }
+  }
+
+  //def equals(b: Board): Boolean = throw new RuntimeException("Noo!")
 
   /*
   def equals(b: Board): Boolean = {

@@ -4,13 +4,16 @@ import scala.collection.mutable.ListBuffer
 import akka.actor.{ ActorRef, ActorLogging, Actor }
 import as.akka.broadcaster._
 import as.chessproblem.Messages
-import as.chess.problem.board.{ Board ⇒ ProblemBoard }
+import as.chess.problem.board.Board
 import as.ama.startup._
 import com.typesafe.config.Config
 
+/**
+ * Accumulates boards and publish them in AccumulatedAcceptedBoards message after receiving BoardsAcceptationFinished.
+ */
 class AcceptedBoardsAccumulator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
-  protected val acceptedBoards = new ListBuffer[ProblemBoard]
+  protected val acceptedBoards = new ListBuffer[Board]
 
   override def preStart() {
     try {
@@ -27,7 +30,7 @@ class AcceptedBoardsAccumulator(commandLineArguments: Array[String], config: Con
 
     case Messages.AcceptedBoard(board) ⇒ acceptedBoards += board
 
-    case Messages.BoardsAcceptiationFinished ⇒ {
+    case Messages.BoardsAcceptationFinished ⇒ {
       broadcaster ! new Messages.AccumulatedAcceptedBoards(acceptedBoards)
       context.stop(self)
     }

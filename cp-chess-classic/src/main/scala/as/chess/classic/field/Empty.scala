@@ -5,5 +5,5 @@ object Empty {
 }
 
 class Empty protected extends Field[Nothing] {
-  override def equals(field: Field[_]): Boolean = field == Empty.empty //field.isInstanceOf[Empty]
+  override def equals(field: Field[_]): Boolean = field == Empty.empty
 }

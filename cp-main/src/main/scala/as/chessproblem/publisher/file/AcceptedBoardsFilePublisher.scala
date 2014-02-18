@@ -9,6 +9,9 @@ import com.typesafe.config.Config
 import java.io._
 import as.chessproblem.publisher.AcceptedBoardsPublisherClassifier
 
+/**
+ * Save all boards to file.
+ */
 class AcceptedBoardsFilePublisher(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   protected var acceptedBoardsFilePublisherConfig: AcceptedBoardsFilePublisherConfig = _
@@ -30,6 +33,9 @@ class AcceptedBoardsFilePublisher(commandLineArguments: Array[String], config: C
       startTime = System.currentTimeMillis
 
       bufferedWriter.append(s"===== Will write chess boards below, start time ${startTime}ms. =====")
+      bufferedWriter.newLine()
+      bufferedWriter.append(s"Command line arguments: '${commandLineArguments.mkString(" ")}'.")
+      bufferedWriter.newLine()
       bufferedWriter.newLine()
 
       broadcaster ! new Broadcaster.Register(self, new AcceptedBoardsPublisherClassifier)

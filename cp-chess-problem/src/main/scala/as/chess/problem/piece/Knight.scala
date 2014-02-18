@@ -16,7 +16,5 @@ class Knight protected extends as.chess.classic.piece.Knight with Piece {
     createUnsafePosition(x, y, 0, pm)
   }
 
-  override def equals(piece: ClassicPiece): Boolean = piece == Knight.knight
-
   override def toString = getClass.getSimpleName
 }

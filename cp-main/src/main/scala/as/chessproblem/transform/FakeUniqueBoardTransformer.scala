@@ -6,6 +6,9 @@ import as.ama.startup.InitializationResult
 import as.chessproblem.Messages
 import com.typesafe.config.Config
 
+/**
+ * Does not do any rotations or mirroring. Just transparently passing boards forward.
+ */
 class FakeUniqueBoardTransformer(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   override def preStart() {

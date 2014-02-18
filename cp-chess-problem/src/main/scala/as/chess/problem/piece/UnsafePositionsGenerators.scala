@@ -1,5 +1,8 @@
 package as.chess.problem.piece
 
+/**
+ * Helper methods that generate unsafe positions on board like '+' or 'X' sign.
+ */
 object UnsafePositionsGenerators {
 
   def generatePositionModificatorsAsPlusSign(centerX: Int, centerY: Int, width: Int, height: Int): Array[(Int, Int)] = {

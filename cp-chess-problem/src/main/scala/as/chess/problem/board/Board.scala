@@ -81,32 +81,6 @@ class Board(array: Array[Array[ClassicField[ClassicPiece]]]) extends ClassicBoar
     }
   }
 
-  def equals(b: Board): Boolean = {
-    if (width == b.width && height == b.height) {
-      (0 until height).find { y ⇒
-        (0 until width).find { x ⇒
-
-          val f1 = array(y)(x)
-          val f2 = b.array(y)(x)
-
-          val isO1 = f1.isInstanceOf[Occupied[_]]
-          val isO2 = f2.isInstanceOf[Occupied[_]]
-
-          val bo = if (isO1 && isO2)
-            f1.equals(f2)
-          else if (isO1 || isO2)
-            false
-          else
-            true
-
-          !bo
-        }.isDefined
-      }.isEmpty
-    } else {
-      false
-    }
-  }
-
   def mirrorHorizontally: Board = {
     val newBoard = new Board(width, height)
     hmt(array, newBoard.array)

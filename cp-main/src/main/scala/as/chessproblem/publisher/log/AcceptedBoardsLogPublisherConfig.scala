@@ -17,6 +17,9 @@ object AcceptedBoardsLogPublisherConfig {
   final val drawBoardsWhileProducedConfigKey = "drawBoardsWhileProduced"
   final val printProducedBoardNumberModuloFactorConfigKey = "printProducedBoardNumberModuloFactor"
 
+  /**
+   * Parsing configuration.
+   */
   def apply(config: Config): AcceptedBoardsLogPublisherConfig = {
 
     val asciiDefinitions = {
@@ -41,4 +44,7 @@ object AcceptedBoardsLogPublisherConfig {
   }
 }
 
+/**
+ * Configuration read from JSON (HOCON) file (by Typesafe Config library)
+ */
 case class AcceptedBoardsLogPublisherConfig(asciiDefinitions: AsciiDefinitions, drawBoardsWhileProduced: Boolean, printProducedBoardNumberModuloFactor: Int, drawBoardsAtTheEnd: Boolean)

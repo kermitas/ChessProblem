@@ -2,11 +2,14 @@ package as.chessproblem.cmdline
 
 import akka.actor._
 import as.chessproblem._
-import as.chess.problem.board.{ Board ⇒ ProblemBoard }
-import as.chess.problem.piece.{ Piece ⇒ ProblmePiece }
+import as.chess.problem.board.Board
+import as.chess.problem.piece.Piece
 import as.ama.startup._
 import com.typesafe.config.Config
 
+/**
+ * Parse command line arguments and publish ProblemSettings on broadcaster.
+ */
 class CommandLineArgumentsParser(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   override def preStart() {
@@ -31,5 +34,5 @@ class CommandLineArgumentsParser(commandLineArguments: Array[String], config: Co
     case message ⇒ log.warning(s"Unhandled $message send by ${sender()}")
   }
 
-  protected def parseCommandLineArguments(commandLineArguments: Array[String]) = new Messages.ProblemSettings(ProblemBoard(commandLineArguments, 0), ProblmePiece(commandLineArguments, 2))
+  protected def parseCommandLineArguments(commandLineArguments: Array[String]) = new Messages.ProblemSettings(Board(commandLineArguments, 0), Piece(commandLineArguments, 2))
 }

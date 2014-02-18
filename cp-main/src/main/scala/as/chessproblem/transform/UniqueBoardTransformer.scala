@@ -10,6 +10,11 @@ import com.typesafe.config.Config
 import as.chess.problem.board.Board
 import as.chess.problem.geom.transform._
 
+/**
+ * For every square board do clockwise quadrant rotations (and for each rotation does vertical mirroring).
+ *
+ * For every rectangle board do vertical, horizontal and vertical-and-horizontal mirroring.
+ */
 class UniqueBoardTransformer(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   override def preStart() {
@@ -24,6 +29,7 @@ class UniqueBoardTransformer(commandLineArguments: Array[String], config: Config
   override def postRestart(throwable: Throwable) = preStart()
 
   override def receive = {
+
     case Messages.GeneratedUniqueBoard(uniqueBoard) ⇒ boardTransformer(uniqueBoard).foreach(broadcaster ! new Messages.GeneratedBoard(_))
 
     case Messages.AllUniqueBoardsWereGenerated ⇒ {
@@ -53,7 +59,6 @@ class UniqueBoardTransformer(commandLineArguments: Array[String], config: Config
       addWithVerticalMirroring(board.rotateClockwise(ClockwiseQuadrantRotation90))
       addWithVerticalMirroring(board.rotateClockwise(ClockwiseQuadrantRotation180))
       addWithVerticalMirroring(board.rotateClockwise(ClockwiseQuadrantRotation270))
-
     } else {
       addIfUnique(board.mirrorHorizontally)
       addIfUnique(board.mirrorVerticallyAndHorizontally)

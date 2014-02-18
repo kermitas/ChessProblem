@@ -15,7 +15,5 @@ class Queen protected extends as.chess.classic.piece.Queen with Piece {
     createUnsafePosition(x, y, 0, Array.concat(positionModificatorsAsCross, positionModificatorsAsPlus))
   }
 
-  override def equals(piece: ClassicPiece): Boolean = piece == Queen.queen
-
   override def toString = getClass.getSimpleName
 }

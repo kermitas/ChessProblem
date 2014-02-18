@@ -8,6 +8,9 @@ import as.ama.startup._
 import com.typesafe.config.Config
 import as.chessproblem.publisher.AcceptedBoardsPublisherClassifier
 
+/**
+ * Log all boards.
+ */
 class AcceptedBoardsLogPublisher(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
 
   protected var acceptedBoardsLogPublisherConfig: AcceptedBoardsLogPublisherConfig = _

@@ -15,7 +15,7 @@ object Messages {
   case object AllBoardsWereGenerated extends Serializable
 
   case class AcceptedBoard(board: ProblemBoard) extends Serializable
-  case object BoardsAcceptiationFinished extends Serializable
+  case object BoardsAcceptationFinished extends Serializable
 
   case class AccumulatedAcceptedBoards(results: GenSeq[ProblemBoard]) extends Serializable
 

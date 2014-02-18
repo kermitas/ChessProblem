@@ -14,7 +14,5 @@ class Bishop protected extends as.chess.classic.piece.Bishop with Piece {
     createUnsafePosition(x, y, 0, positionModificators)
   }
 
-  override def equals(piece: ClassicPiece): Boolean = piece == Bishop.bishop
-
   override def toString = getClass.getSimpleName
 }

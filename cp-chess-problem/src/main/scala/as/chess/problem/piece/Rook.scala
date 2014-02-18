@@ -14,7 +14,5 @@ class Rook protected extends as.chess.classic.piece.Rook with Piece {
     createUnsafePosition(x, y, 0, positionModificators)
   }
 
-  override def equals(piece: ClassicPiece): Boolean = piece == Rook.rook
-
   override def toString = getClass.getSimpleName
 }
