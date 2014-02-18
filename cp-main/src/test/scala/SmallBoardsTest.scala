@@ -1,12 +1,45 @@
 import org.scalatest._
 
 import as.chess.problem.piece._
-import as.chess.problem.board.{ UniqueBoardsGenerator, Board }
+import as.chess.problem.board.{ UniqueBoardsGenerator, BoardsGenerator, Board }
 
 class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
 
   final val printBoards = false
 
+  /*
+  scenario("basic board scenario: 3x3 board 2x King", SmallBoardsTestTag) {
+    Given("board (3,3)")
+    val board = new Board(3, 3)
+    And("2x King")
+    val piecesStream = List[Piece](King.king, King.king).toStream
+    When("we generate boards")
+    val boardsStream = BoardsGenerator.generateBoardsStream(board, piecesStream)
+    Then("result should be 16 (non unique) boards")
+
+    val readyBoards = boardsStream.filter(_.isDefined).map(_.get)
+    if (printBoards) readyBoards.foreach(b ⇒ println(as.chess.problem.drawer.AsciiDrawer.draw(b)))
+
+    readyBoards.size should be(16)
+  }
+  */
+
+  scenario("basic board scenario: 3x3 board 2x King, 1x Rook", SmallBoardsTestTag) {
+    Given("board (3,3)")
+    val board = new Board(3, 3)
+    And("2x King, 1x Rook")
+    val piecesStream = List[Piece](King.king, King.king, Rook.rook).toStream
+    When("we generate boards")
+    val boardsStream = BoardsGenerator.generateBoardsStream(board, piecesStream)
+    Then("result should be 4 (non unique) boards")
+
+    val readyBoards = boardsStream.filter(_.isDefined).map(_.get)
+    if (printBoards) readyBoards.foreach(b ⇒ println(as.chess.problem.drawer.AsciiDrawer.draw(b)))
+
+    readyBoards.size should be(4)
+  }
+
+  /*
   scenario("basic board scenario: 2x2 board 1x LightFlyer", SmallBoardsTestTag) {
     Given("board (2,2)")
     val board = new Board(2, 2)
@@ -136,4 +169,5 @@ class SmallBoardsTest extends FeatureSpec with GivenWhenThen with Matchers {
     Then("result should be 6 unique board")
     boardsStream.filter(_.isDefined).size should be(6)
   }
+  */
 }

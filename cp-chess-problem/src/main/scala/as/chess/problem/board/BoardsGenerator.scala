@@ -11,14 +11,18 @@ object BoardsGenerator {
 
   def generateBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
 
-    val treeSetBuilder: scala.collection.generic.CanBuildFrom[TreeSet[PositionedPiece], PositionedPiece, TreeSet[PositionedPiece]] = TreeSet.newCanBuildFrom[PositionedPiece](new DistanceBasedPositionedPieceInSetOrdering(board.height))
-    val mbs = new MutableBlacklistedSets3(board.width, board.height, treeSetBuilder)
-    val piecesOnBoard = TreeSet[PositionedPiece]()(new DistanceBasedPositionedPieceInSetOrdering(board.height))
+    //val s1 = Stream[Option[String]]({ println("s1"); None })
+    //val s2 = Stream[Option[String]]({ println("s2"); Some("aa") })
 
-    generateBoardsStream(board, 0, 0, pieces, mbs, piecesOnBoard)
+    //val s3 = Stream[Option[String]]({ println("s1"); None }) + { println("s2"); Some("aa"); "bb" }
+    //println(s"0: pieces=${pieces.mkString(",")}")
+
+    generateBoardsStream(board, 0, 0, pieces)
   }
 
-  def generateBoardsStream(board: ProblemBoard, startX: Int, startY: Int, pieces: Stream[Piece], mbs: MutableBlacklistedSets3, piecesOnBoard: TreeSet[PositionedPiece]): Stream[Option[ProblemBoard]] = {
+  def generateBoardsStream(board: ProblemBoard, startX: Int, startY: Int, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
+
+    println(s"A: startX=$startX, startY=$startY pieces=${pieces.mkString(",")}")
 
     if (board.getSafeFieldsCount >= pieces.length) {
 
@@ -26,19 +30,20 @@ object BoardsGenerator {
 
         case piece #:: restOfPieces ⇒ {
 
-          None #:: {
+          Stream[Option[ProblemBoard]](None) ++: {
 
             val positionedPieceStream = {
               val positions = Position.generatePositionsStream(startX, startY, board.width, board.height)
               PositionedPiece.generatePositionedPiecesStream(piece, positions)
             }
 
-            generateBoards(board, positionedPieceStream, restOfPieces, mbs, piecesOnBoard)
+            generateBoards(board, positionedPieceStream, restOfPieces)
           }
         }
 
         case _ ⇒ {
-          Some(board) #:: Stream.empty
+          //Some(board) #:: Stream.empty
+          Stream[Option[ProblemBoard]](Some(board))
         }
       }
     } else {
@@ -46,47 +51,103 @@ object BoardsGenerator {
     }
   }
 
-  def generateBoards(board: ProblemBoard, positionedPieceStream: Stream[PositionedPiece], restOfPieces: Stream[Piece], mbs: MutableBlacklistedSets3, piecesOnBoard: TreeSet[PositionedPiece]): Stream[Option[ProblemBoard]] = {
+  def generateBoards(board: ProblemBoard, positionedPieceStream: Stream[PositionedPiece], restOfPieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
+
+    println(s"B: restOfPieces=${restOfPieces.mkString(",")} positionedPieceStream=${positionedPieceStream.mkString(",")}")
 
     positionedPieceStream match {
 
       case positionedPiece #:: restOfPositionedPieceStream ⇒ {
 
-        val updatedPiecesOnBoard = piecesOnBoard + positionedPiece
+        println(s"B: tooked from the stream positionedPiece = ${positionedPiece}, restOfPositionedPieceStream = ${restOfPositionedPieceStream.mkString(", ")}")
 
-        if (updatedPiecesOnBoard.size == piecesOnBoard.size) {
-          // positionedPiece was not added to piecesOnBoard set - can be caused by collision
-          // for example: there is [(0,0) King] on the board and we are trying to add next one [(0,0) King]
+        board.put(positionedPiece.x, positionedPiece.y, positionedPiece.piece) match {
 
-          None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, mbs, piecesOnBoard)
-
-        } else {
-          if (!mbs.isBlacklisted(updatedPiecesOnBoard)) {
-
-            //mbs.blacklist(piecesOnBoard, positionedPiece)
-
-            board.put(positionedPiece.x, positionedPiece.y, positionedPiece.piece) match {
-
-              case Left(e) ⇒ {
-                None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, mbs, piecesOnBoard)
-              }
-
-              case Right(nextBoard) ⇒ {
-
-                mbs.blacklist(piecesOnBoard, positionedPiece)
-
-                None #:: generateBoardsStream(nextBoard, 0, 0, restOfPieces, mbs, updatedPiecesOnBoard) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces, mbs, piecesOnBoard)
-                //None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, mbs, piecesOnBoard) ++: generateUniqueBoardsStream(nextBoard, 0, 0, restOfPieces, mbs, updatedPiecesOnBoard)
-              }
+          case Left(e) ⇒ {
+            if (restOfPositionedPieceStream.isEmpty) {
+              println(s"B: could not put ($e), and there is nothing to go left, returning empty")
+              None #:: Stream.empty
+            } else {
+              println(s"B: could not put ($e), will go left")
+              //val goLeft =
+              None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+              //println("B: could not put, returning left")
+              //goLeft
             }
-          } else {
 
-            None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, mbs, piecesOnBoard)
+            //goLeft
+
+            //Stream[Option[ProblemBoard]](None) ++: goLeft
+
+            //Stream[Option[ProblemBoard]](None)
+          }
+
+          case Right(nextBoard) ⇒ {
+
+            if (restOfPieces.isEmpty) {
+              println("A: --------- board is ready!! -------------")
+              println(as.chess.problem.drawer.AsciiDrawer.draw(nextBoard))
+              Thread.sleep(1000)
+
+              if (restOfPositionedPieceStream.isEmpty) {
+                //Stream[Option[ProblemBoard]](Some(nextBoard))
+                Some(nextBoard) #:: Stream.empty
+              } else {
+                Some(nextBoard) #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+              }
+
+            } else {
+              println(as.chess.problem.drawer.AsciiDrawer.draw(nextBoard))
+              Thread.sleep(300)
+
+              var startX = 0
+              var startY = 0
+
+              if (!restOfPositionedPieceStream.isEmpty && restOfPositionedPieceStream(0).piece == positionedPiece.piece) {
+                startX = positionedPiece.x + 1
+                startY = positionedPiece.y
+              }
+
+              println("B: preparing ...")
+
+              if (restOfPieces.isEmpty) {
+
+                if (restOfPositionedPieceStream.isEmpty) {
+                  println("B: will go only down")
+                  None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces)
+                } else {
+
+                  println("B: will go down and left")
+                  None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces) //++: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+                }
+              } else {
+                if (restOfPositionedPieceStream.isEmpty) {
+                  println("B: will not go down and/or left")
+                  None #:: Stream.empty
+                } else {
+
+                  println("B: will go down and left (but donw only!)")
+                  //None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+                  None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+                }
+              }
+
+              //val goDown = if (restOfPieces.isEmpty) None #:: Stream.empty else None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces)
+              //val goLeft = if (restOfPositionedPieceStream.isEmpty) None #:: Stream.empty else None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+
+              //++: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+              //None #:: goDown ++: goLeft
+            }
+
+            //None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, mbs, piecesOnBoard) ++: generateUniqueBoardsStream(nextBoard, 0, 0, restOfPieces, mbs, updatedPiecesOnBoard)
           }
         }
       }
 
-      case _ ⇒ Stream.empty
+      case _ ⇒ {
+        println("B: no more positioned pieces to process, returning empty")
+        Stream.empty
+      }
     }
   }
 }
