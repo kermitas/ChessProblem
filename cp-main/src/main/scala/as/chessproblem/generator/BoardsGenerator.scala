@@ -8,10 +8,22 @@ import as.ama.startup._
 import com.typesafe.config.Config
 import as.ama.addon.lifecycle.LifecycleListener
 
+object BoardsGenerator {
+  final val parallelProcessingFactorConfigKey = "parallelProcessingFactor"
+}
+
 class BoardsGenerator(commandLineArguments: Array[String], config: Config, broadcaster: ActorRef) extends Actor with ActorLogging {
+
+  import BoardsGenerator._
+
+  protected var parallelProcessingFactor: Int = 1
 
   override def preStart() {
     try {
+
+      parallelProcessingFactor = config.getInt(parallelProcessingFactorConfigKey)
+      if (parallelProcessingFactor <= 0) parallelProcessingFactor = Runtime.getRuntime.availableProcessors
+
       broadcaster ! new Broadcaster.Register(self, new BoardsGeneratorClassifier)
       broadcaster ! new InitializationResult(Right(None))
     } catch {
@@ -23,35 +35,27 @@ class BoardsGenerator(commandLineArguments: Array[String], config: Config, broad
 
   override def receive = {
 
-    case Messages.ProblemSettings(board, pieces) ⇒ self ! as.chess.problem.board.BoardsGenerator.generateBoardsStream(board, pieces.toStream)
+    case ps: Messages.ProblemSettings ⇒ {
 
-    case boardsStream: Stream[_]                 ⇒ pullBoardFromTheStreamThenContinueOrStop(boardsStream.asInstanceOf[Stream[Option[Board]]])
+      log.debug(s"Will start $parallelProcessingFactor parallel processes that will pull boards from streams")
 
-    case ss: LifecycleListener.ShutdownSystem    ⇒ context.stop(self)
-
-    case message                                 ⇒ log.warning(s"Unhandled $message send by ${sender()}")
-  }
-
-  protected def pullBoardFromTheStreamThenContinueOrStop(boardsStream: Stream[Option[Board]]) {
-    boardsStream match {
-
-      case boardOption #:: restOfBoards ⇒ {
-
-        boardOption match {
-
-          case Some(board) ⇒ {
-            broadcaster ! new Messages.GeneratedBoard(board)
-            self ! restOfBoards
-          }
-
-          case None ⇒ self ! restOfBoards
-        }
+      for (i ← 0 until parallelProcessingFactor) {
+        val worker = context.actorOf(BoardsGeneratorWorker.props(broadcaster, i, parallelProcessingFactor), name = classOf[BoardsGeneratorWorker].getSimpleName + "-" + i)
+        context.watch(worker)
+        worker ! ps
       }
+    }
 
-      case _ ⇒ {
+    case Terminated(diedActor) ⇒ {
+      if (context.children.isEmpty) {
         broadcaster ! Messages.AllBoardsWereGenerated
         context.stop(self)
       }
     }
+
+    case ss: LifecycleListener.ShutdownSystem ⇒ context.stop(self)
+
+    case message                              ⇒ log.warning(s"Unhandled $message send by ${sender()}")
   }
 }
+
