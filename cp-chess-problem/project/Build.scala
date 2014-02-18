@@ -6,7 +6,7 @@ object Build extends Build {
 
   lazy val projectSettings = Defaults.defaultSettings ++ Seq (
     name := "cp-chess-problem",
-    version := "0.4.0",
+    version := "0.5.0",
     organization := "as.chessproblem",
     scalaVersion := "2.10.3",
     scalacOptions ++= Seq("-feature", "-unchecked", "-deprecation")
