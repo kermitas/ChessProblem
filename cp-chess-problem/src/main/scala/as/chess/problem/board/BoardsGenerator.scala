@@ -43,7 +43,8 @@ object BoardsGenerator {
 
         case _ ⇒ {
           //Some(board) #:: Stream.empty
-          Stream[Option[ProblemBoard]](Some(board))
+          //Stream[Option[ProblemBoard]](Some(board))
+          Stream.empty
         }
       }
     } else {
@@ -66,7 +67,8 @@ object BoardsGenerator {
           case Left(e) ⇒ {
             if (restOfPositionedPieceStream.isEmpty) {
               //println(s"B: could not put ($e), and there is nothing to go left, returning empty")
-              None #:: Stream.empty
+              //None #:: Stream.empty
+              Stream.empty
             } else {
               //println(s"B: could not put ($e), will go left")
               //val goLeft =
@@ -84,6 +86,7 @@ object BoardsGenerator {
 
           case Right(nextBoard) ⇒ {
 
+            /*
             if (restOfPieces.isEmpty) {
               //println("A: --------- board is ready!! -------------")
               //println(as.chess.problem.drawer.AsciiDrawer.draw(nextBoard))
@@ -97,56 +100,57 @@ object BoardsGenerator {
               }
 
             } else {
-              //println(as.chess.problem.drawer.AsciiDrawer.draw(nextBoard))
-              //Thread.sleep(200)
+              */
+            //println(as.chess.problem.drawer.AsciiDrawer.draw(nextBoard))
+            //Thread.sleep(200)
 
-              //println("B: preparing ...")
+            //println("B: preparing ...")
 
-              if (restOfPieces.isEmpty) {
+            if (restOfPieces.isEmpty) {
 
-                if (restOfPositionedPieceStream.isEmpty) {
-                  //println("B: will go only down")
-                  //None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces)
+              if (restOfPositionedPieceStream.isEmpty) {
+                //println("B: will go only down")
+                //None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces)
 
-                  //println("B: will go left only")
-                  None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
-                } else {
-                  //println("B: will go down and left")
-                  //None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces) //++: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
-
-                  //println("B: will go left only")
-                  None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
-                }
+                //println("B: will go left only")
+                Some(nextBoard) #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
               } else {
+                //println("B: will go down and left")
+                //None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces) //++: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
 
-                var startX = 0
-                var startY = 0
+                //println("B: will go left only")
+                Some(nextBoard) #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+              }
+            } else {
 
-                if (restOfPieces(0) == positionedPiece.piece) {
-                  startX = positionedPiece.x + 1
-                  startY = positionedPiece.y
-                }
+              var startX = 0
+              var startY = 0
 
-                if (restOfPositionedPieceStream.isEmpty) {
-                  //println("B: will go down only")
-
-                  //None #:: Stream.empty
-                  None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces)
-                } else {
-
-                  //println("B: will go down and left")
-
-                  //None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
-                  None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces) ++: None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
-                }
+              if (restOfPieces(0) == positionedPiece.piece) {
+                startX = positionedPiece.x + 1
+                startY = positionedPiece.y
               }
 
-              //val goDown = if (restOfPieces.isEmpty) None #:: Stream.empty else None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces)
-              //val goLeft = if (restOfPositionedPieceStream.isEmpty) None #:: Stream.empty else None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+              if (restOfPositionedPieceStream.isEmpty) {
+                //println("B: will go down only")
 
-              //++: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
-              //None #:: goDown ++: goLeft
+                //None #:: Stream.empty
+                None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces)
+              } else {
+
+                //println("B: will go down and left")
+
+                //None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+                None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces) ++: None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+              }
             }
+
+            //val goDown = if (restOfPieces.isEmpty) None #:: Stream.empty else None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces)
+            //val goLeft = if (restOfPositionedPieceStream.isEmpty) None #:: Stream.empty else None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+
+            //++: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+            //None #:: goDown ++: goLeft
+            //}
 
             //None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces, mbs, piecesOnBoard) ++: generateUniqueBoardsStream(nextBoard, 0, 0, restOfPieces, mbs, updatedPiecesOnBoard)
           }
