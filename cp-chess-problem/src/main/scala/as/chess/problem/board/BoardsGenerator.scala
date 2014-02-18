@@ -1,26 +1,63 @@
 package as.chess.problem.board
 
-import scala.collection.immutable.TreeSet
+import scala.collection.mutable.ListBuffer
 import as.chess.problem.piece.{ PositionedPiece, Piece }
 import as.chess.problem.board.{ Board ⇒ ProblemBoard }
-import as.chess.problem.piece.set2.MutableBlacklistedSets3
-import as.chess.problem.geom.Position
-import as.chess.problem.piece.set.DistanceBasedPositionedPieceInSetOrdering
+import as.chess.problem.geom.Position2
 
 object BoardsGenerator {
 
-  def generateBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
+  def generateBoardsStream(board: ProblemBoard, pieces: Stream[Piece], partsCount: Int): List[Stream[Option[ProblemBoard]]] = {
 
-    //val s1 = Stream[Option[String]]({ println("s1"); None })
-    //val s2 = Stream[Option[String]]({ println("s2"); Some("aa") })
+    //println(s"partsCount=$partsCount")
 
-    //val s3 = Stream[Option[String]]({ println("s1"); None }) + { println("s2"); Some("aa"); "bb" }
-    //println(s"0: pieces=${pieces.mkString(",")}")
+    val fieldsCount = board.width * board.height
+    val onePartFieldsCount: Int = fieldsCount / partsCount
 
-    generateBoardsStream(board, 0, 0, pieces)
+    val partFieldsCount = new Array[Int](partsCount)
+    for (i ← 0 until partsCount) partFieldsCount(i) = onePartFieldsCount
+
+    val toAddToLastPart = (fieldsCount - onePartFieldsCount * partsCount)
+
+    partFieldsCount(partsCount - 1) = partFieldsCount(partsCount - 1) + toAddToLastPart
+
+    //partFieldsCount.foreach(part ⇒ println(s"in part $part"))
+
+    def getPositionFromFieldNumber(fieldNumber: Int): (Int, Int) = {
+      val y: Int = fieldNumber / board.height
+      val x: Int = fieldNumber % board.height
+      (x, y)
+    }
+
+    val list = ListBuffer[Stream[Option[ProblemBoard]]]()
+
+    var sum = 0
+    for (part ← partFieldsCount) {
+
+      val start = sum
+      //val end = sum + part - 1
+
+      val s = getPositionFromFieldNumber(start)
+      //val e = getPositionFromFieldNumber(end)
+
+      //println(s"part = $part, start=$start, s=$s")
+
+      list += generateBoardsStream(board, s._1, s._2, part, pieces)
+
+      sum += part
+    }
+
+    list.toList
   }
 
-  def generateBoardsStream(board: ProblemBoard, startX: Int, startY: Int, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
+  //def generateBoardsStream(board: ProblemBoard, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
+
+  //println(s"0: pieces=${pieces.mkString(",")}")
+
+  //  generateBoardsStream(board, 0, 0, pieces)
+  //}
+
+  def generateBoardsStream(board: ProblemBoard, startX: Int, startY: Int, count: Int, pieces: Stream[Piece]): Stream[Option[ProblemBoard]] = {
 
     //println(s"A: startX=$startX, startY=$startY pieces=${pieces.mkString(",")}")
 
@@ -30,10 +67,11 @@ object BoardsGenerator {
 
         case piece #:: restOfPieces ⇒ {
 
-          Stream[Option[ProblemBoard]](None) ++: {
+          //Stream[Option[ProblemBoard]](None) ++: {
+          None #:: {
 
             val positionedPieceStream = {
-              val positions = Position.generatePositionsStream(startX, startY, board.width, board.height)
+              val positions = Position2.generatePositionsStream(startX, startY, board.width, board.height, count)
               PositionedPiece.generatePositionedPiecesStream(piece, positions)
             }
 
@@ -123,25 +161,28 @@ object BoardsGenerator {
               }
             } else {
 
-              var startX = 0
-              var startY = 0
+              var positionOfNextPiece: (Int, Int) = (0, 0)
 
               if (restOfPieces(0) == positionedPiece.piece) {
-                startX = positionedPiece.x + 1
-                startY = positionedPiece.y
+                positionOfNextPiece = Position2.getNextPosition(positionedPiece.x, positionedPiece.y, board.width, board.height) match {
+                  case Some(np) ⇒ np
+                  case None     ⇒ positionOfNextPiece
+                }
+                //startX = positionedPiece.x + 1
+                //startY = positionedPiece.y
               }
 
               if (restOfPositionedPieceStream.isEmpty) {
                 //println("B: will go down only")
 
                 //None #:: Stream.empty
-                None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces)
+                None #:: generateBoardsStream(nextBoard, positionOfNextPiece._1, positionOfNextPiece._2, board.width * board.height, restOfPieces)
               } else {
 
                 //println("B: will go down and left")
 
                 //None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces) ++: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
-                None #:: generateBoardsStream(nextBoard, startX, startY, restOfPieces) ++: None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
+                None #:: generateBoardsStream(nextBoard, positionOfNextPiece._1, positionOfNextPiece._2, board.width * board.height, restOfPieces) ++: None #:: generateBoards(board, restOfPositionedPieceStream, restOfPieces)
               }
             }
 

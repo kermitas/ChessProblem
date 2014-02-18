@@ -3,10 +3,10 @@ package as.chessproblem.generator
 import akka.actor._
 import as.akka.broadcaster._
 import as.chessproblem.Messages
-import as.chess.problem.board.Board
 import as.ama.startup._
 import com.typesafe.config.Config
 import as.ama.addon.lifecycle.LifecycleListener
+import as.chess.problem.board.{ BoardsGenerator ⇒ BoardsStreamGenerator }
 
 object BoardsGenerator {
   final val parallelProcessingFactorConfigKey = "parallelProcessingFactor"
@@ -35,14 +35,16 @@ class BoardsGenerator(commandLineArguments: Array[String], config: Config, broad
 
   override def receive = {
 
-    case ps: Messages.ProblemSettings ⇒ {
+    case Messages.ProblemSettings(board, pieces) ⇒ {
 
-      log.debug(s"Will start $parallelProcessingFactor parallel processes that will pull boards from streams")
+      log.info(s"Will start $parallelProcessingFactor parallel actors that will pull boards from $parallelProcessingFactor streams (each actor will have its own stream).")
 
-      for (i ← 0 until parallelProcessingFactor) {
-        val worker = context.actorOf(BoardsGeneratorWorker.props(broadcaster, i, parallelProcessingFactor), name = classOf[BoardsGeneratorWorker].getSimpleName + "-" + i)
+      var i = 0
+      for (stream ← BoardsStreamGenerator.generateBoardsStream(board, pieces, parallelProcessingFactor)) {
+        val worker = context.actorOf(BoardsGeneratorWorker.props(broadcaster), name = classOf[BoardsGeneratorWorker].getSimpleName + "-" + i)
+        i += 1
         context.watch(worker)
-        worker ! ps
+        worker ! stream
       }
     }
 

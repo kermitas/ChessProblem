@@ -6,8 +6,6 @@ class Position(val x: Int, val y: Int) extends Serializable {
 
 object Position {
 
-  def generatePositionsStream(width: Int, height: Int): Stream[Position] = generatePositionsStream(0, 0, width, height)
-
   def generatePositionsStream(startX: Int, startY: Int, width: Int, height: Int): Stream[Position] = {
     normalizeStartPosition(startX, startY, width, height) match {
       case Some((x, y)) ⇒ generatePositions(x, y, width, height)
