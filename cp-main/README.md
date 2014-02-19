@@ -22,7 +22,7 @@ Project is build on top of AkkaMicroArchitecture (https://github.com/kermitas/Ak
 - to create distribution `pack` (generated distribution will be located at `target/pack` folder)
 - to quit SBT `exit`
 
-You can use ready distribution without SBT, it is located at `cp-main/distribution`.
+There is also pre prepared distribution and you can use it without SBT. It is located at `cp-main/distribution`.
 
 ### Run (under SBT):
 - go to cp-main project folder `cd cp-main`
