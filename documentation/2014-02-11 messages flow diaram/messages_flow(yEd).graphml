@@ -27,7 +27,7 @@
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
-              <y:BorderInsets bottom="20" bottomF="20.32483809951691" left="2" leftF="1.653401935632246" right="23" rightF="23.092710404241643" top="0" topF="0.0"/>
+              <y:BorderInsets bottom="20" bottomF="20.32483809951691" left="2" leftF="1.653401935632246" right="16" rightF="16.492970557578246" top="0" topF="0.0"/>
             </y:GroupNode>
             <y:GroupNode>
               <y:Geometry height="50.0" width="50.0" x="390.1259765625" y="229.0"/>
@@ -221,9 +221,9 @@ pub-sub actor</y:NodeLabel>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.flowchart.terminator">
                   <y:Geometry height="29.0" width="152.59061833688702" x="1726.869559797581" y="680.0790554105139"/>
-                  <y:Fill color="#E8EEF7" color2="#339966" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="145.46875" x="3.5609341684435094" y="5.515625">GeneratedUniqueBoard<y:LabelModel>
+                  <y:Fill color="#FFFFFF" color2="#8CD8B2" transparent="false"/>
+                  <y:BorderStyle color="#999999" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#666666" visible="true" width="145.46875" x="3.5609341684435094" y="5.515625">GeneratedUniqueBoard<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -237,9 +237,9 @@ pub-sub actor</y:NodeLabel>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.flowchart.terminator">
                   <y:Geometry height="29.0" width="206.0" x="1693.5848686198458" y="843.5681555250483"/>
-                  <y:Fill color="#E8EEF7" color2="#339966" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="198.162109375" x="3.9189453125" y="5.515625">AllUniqueBoardsWereGenerated<y:LabelModel>
+                  <y:Fill color="#FFFFFF" color2="#8CD8B2" transparent="false"/>
+                  <y:BorderStyle color="#999999" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#666666" visible="true" width="198.162109375" x="3.9189453125" y="5.515625">AllUniqueBoardsWereGenerated<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -270,10 +270,10 @@ pub-sub actor</y:NodeLabel>
         <node id="n0::n1">
           <data key="d6">
             <y:GenericNode configuration="com.yworks.flowchart.terminator">
-              <y:Geometry height="28.0" width="164.14162456900385" x="1332.7618854551533" y="693.0728393734033"/>
-              <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="148.99609375" x="7.572765409501926" y="5.015625">UniqueBoardsGenerator<y:LabelModel>
+              <y:Geometry height="28.0" width="164.14162456900385" x="2095.307821058247" y="565.7629122693609"/>
+              <y:Fill color="#FFFFFF" color2="#E3E3E3" transparent="false"/>
+              <y:BorderStyle color="#999999" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#666666" visible="true" width="148.99609375" x="7.572765409501926" y="5.015625">UniqueBoardsGenerator<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -372,10 +372,10 @@ AcceptedBoardsFakeAccumulator<y:LabelModel>
         <node id="n0::n7">
           <data key="d6">
             <y:GenericNode configuration="com.yworks.flowchart.terminator">
-              <y:Geometry height="53.0" width="213.61780383795212" x="2101.043273983906" y="596.5859788211872"/>
-              <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#000000" visible="true" width="184.375" x="14.621401918976062" y="3.546875">UniqueBoardTransformer
+              <y:Geometry height="53.0" width="213.61780383795212" x="2132.8624634404314" y="630.9959684521727"/>
+              <y:Fill color="#FFFFFF" color2="#E3E3E3" transparent="false"/>
+              <y:BorderStyle color="#999999" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#666666" visible="true" width="184.375" x="14.621401918976062" y="3.546875">UniqueBoardTransformer
 OR
 FakeUniqueBoardTransformer<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
@@ -394,6 +394,22 @@ FakeUniqueBoardTransformer<y:LabelModel>
               <y:Fill color="#C0C0C0" color2="#C0C0C0" transparent="false"/>
               <y:BorderStyle color="#C0C0C0" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#808080" visible="true" width="127.03515625" x="8.810780083955251" y="5.015625">InputStreamListener<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+            </y:GenericNode>
+          </data>
+        </node>
+        <node id="n0::n9">
+          <data key="d6">
+            <y:GenericNode configuration="com.yworks.flowchart.terminator">
+              <y:Geometry height="28.0" width="164.14162456900385" x="1320.6888328009272" y="762.5448835181784"/>
+              <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="106.66796875" x="28.736827909501926" y="5.015625">BoardsGenerator<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -428,7 +444,7 @@ implementation of
     <node id="n2">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.terminator">
-          <y:Geometry height="29.0" width="109.0" x="574.1920905081317" y="1468.7976096206066"/>
+          <y:Geometry height="29.0" width="109.0" x="497.76203086598457" y="1499.8499905729875"/>
           <y:Fill color="#E8EEF7" color2="#339966" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="102.75390625" x="3.123046875" y="5.515625">ProblemSettings<y:LabelModel>
@@ -524,7 +540,7 @@ implementation of
     <node id="n8">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.terminator">
-          <y:Geometry height="28.0" width="199.5181236673775" x="332.3004060731638" y="1469.2976096206066"/>
+          <y:Geometry height="28.0" width="199.5181236673775" x="255.87034643101663" y="1500.3499905729875"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="194.775390625" x="2.3713665211887474" y="5.015625">CommandLineArgumentsParser<y:LabelModel>
@@ -540,10 +556,10 @@ implementation of
     <node id="n9">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.terminator">
-          <y:Geometry height="28.0" width="164.36008140563877" x="707.9862235792993" y="1469.2976096206066"/>
-          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="148.99609375" x="7.681993827819383" y="5.015625">UniqueBoardsGenerator<y:LabelModel>
+          <y:Geometry height="28.0" width="164.36008140563877" x="640.3725774560388" y="1405.76808964531"/>
+          <y:Fill color="#FFFFFF" color2="#E3E3E3" transparent="false"/>
+          <y:BorderStyle color="#999999" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#666666" visible="true" width="148.99609375" x="7.681993827819383" y="5.015625">UniqueBoardsGenerator<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -695,7 +711,7 @@ presented differently.<y:LabelModel>
           <y:Geometry height="54.54674840085272" width="223.14411632550105" x="922.6650881463162" y="554.5895091817661"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#000000" visible="true" width="191.96875" x="15.587683162750409" y="4.32024920042636">Agenda:
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#000000" visible="true" width="191.96875" x="15.587683162750523" y="4.32024920042636">Agenda:
 - marked with blue - actor
 - marked with green - message<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -711,10 +727,10 @@ presented differently.<y:LabelModel>
     <node id="n19">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.terminator">
-          <y:Geometry height="53.0" width="213.61780383795212" x="1154.9775985091665" y="1456.7976096206066"/>
-          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#000000" visible="true" width="184.375" x="14.621401918976062" y="3.546875">UniqueBoardTransformer
+          <y:Geometry height="53.0" width="213.61780383795212" x="1087.363952385906" y="1393.26808964531"/>
+          <y:Fill color="#FFFFFF" color2="#E3E3E3" transparent="false"/>
+          <y:BorderStyle color="#999999" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#666666" visible="true" width="184.375" x="14.621401918976062" y="3.546875">UniqueBoardTransformer
 OR
 FakeUniqueBoardTransformer<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -729,10 +745,10 @@ FakeUniqueBoardTransformer<y:LabelModel>
     <node id="n20">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.terminator">
-          <y:Geometry height="30.104761904761904" width="162.30149253731315" x="935.3901455672493" y="1499.2976096206066"/>
-          <y:Fill color="#E8EEF7" color2="#339966" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="145.46875" x="8.416371268656576" y="6.068005952380872">GeneratedUniqueBoard<y:LabelModel>
+          <y:Geometry height="30.104761904761904" width="162.30149253731315" x="867.7764994439888" y="1435.76808964531"/>
+          <y:Fill color="#FFFFFF" color2="#8CD8B2" transparent="false"/>
+          <y:BorderStyle color="#999999" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#666666" visible="true" width="145.46875" x="8.416371268656576" y="6.068005952380872">GeneratedUniqueBoard<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -745,10 +761,10 @@ FakeUniqueBoardTransformer<y:LabelModel>
     <node id="n21">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.terminator">
-          <y:Geometry height="29.0" width="229.62460967528114" x="901.7285869982653" y="1440.2976096206066"/>
-          <y:Fill color="#E8EEF7" color2="#339966" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="198.162109375" x="15.731250150140568" y="5.515625">AllUniqueBoardsWereGenerated<y:LabelModel>
+          <y:Geometry height="29.0" width="229.62460967528114" x="834.1149408750048" y="1376.76808964531"/>
+          <y:Fill color="#FFFFFF" color2="#8CD8B2" transparent="false"/>
+          <y:BorderStyle color="#999999" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#666666" visible="true" width="198.162109375" x="15.731250150140568" y="5.515625">AllUniqueBoardsWereGenerated<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -780,7 +796,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
           <y:Geometry height="29.0" width="326.86999693947155" x="2574.1120270827214" y="1469.467092046734"/>
           <y:Fill color="#E8EEF7" color2="#339966" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="309.220703125" x="8.824646907235774" y="5.515625">InputStreamListenerCallbackImpl.InputStreamText<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="309.220703125" x="8.824646907235547" y="5.515625">InputStreamListenerCallbackImpl.InputStreamText<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -788,6 +804,56 @@ FakeUniqueBoardTransformer<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
         </y:GenericNode>
+      </data>
+    </node>
+    <node id="n24">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.terminator">
+          <y:Geometry height="28.0" width="164.36008140563877" x="1012.094602866476" y="1526.4357918058254"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="106.66796875" x="28.846056327819383" y="5.015625">BoardsGenerator<y:LabelModel>
+              <y:SmartNodeLabelModel distance="4.0"/>
+            </y:LabelModel>
+            <y:ModelParameter>
+              <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+            </y:ModelParameter>
+          </y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n25">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="29.0" width="137.09138838610124" x="2418.2993370202603" y="473.96365355437405"/>
+          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="119.93359375" x="8.578897318050622" y="5.515625">Currently not used.<y:LabelModel>
+              <y:SmartNodeLabelModel distance="4.0"/>
+            </y:LabelModel>
+            <y:ModelParameter>
+              <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+            </y:ModelParameter>
+          </y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n26">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="29.0" width="137.09138838610124" x="995.867461316863" y="1265.1525597694974"/>
+          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="119.93359375" x="8.578897318050622" y="5.515625">Currently not used.<y:LabelModel>
+              <y:SmartNodeLabelModel distance="4.0"/>
+            </y:LabelModel>
+            <y:ModelParameter>
+              <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+            </y:ModelParameter>
+          </y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
       </data>
     </node>
     <edge id="e0" source="n1" target="n0">
@@ -803,7 +869,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="0.0" sy="0.0" tx="10.43195406169366" ty="-0.7977898553028808"/>
-          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:BezierEdge>
       </data>
@@ -920,7 +986,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:BezierEdge>
       </data>
@@ -938,7 +1004,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="1103.8294243070363" y="1599.5018550106602"/>
+            <y:Point x="961.7519690386466" y="1683.7334892054912"/>
             <y:Point x="1352.6539414606998" y="1662.050059064725"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -950,7 +1016,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:BezierEdge>
       </data>
@@ -1159,7 +1225,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>
@@ -1168,7 +1234,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>
@@ -1177,7 +1243,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>
@@ -1186,7 +1252,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>
@@ -1195,7 +1261,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>
@@ -1204,7 +1270,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>
@@ -1213,7 +1279,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>
@@ -1222,7 +1288,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>
@@ -1231,7 +1297,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>
@@ -1240,7 +1306,7 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>
@@ -1249,13 +1315,12 @@ FakeUniqueBoardTransformer<y:LabelModel>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle color="#808080" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>
     </edge>
     <edge id="n0::e23" source="n0::n0::n11" target="n0::n2">
-      <data key="d9"/>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1265,7 +1330,6 @@ FakeUniqueBoardTransformer<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e24" source="n0::n8" target="n0::n0::n11">
-      <data key="d9"/>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1275,7 +1339,6 @@ FakeUniqueBoardTransformer<y:LabelModel>
       </data>
     </edge>
     <edge id="e28" source="n22" target="n23">
-      <data key="d9"/>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -1285,11 +1348,110 @@ FakeUniqueBoardTransformer<y:LabelModel>
       </data>
     </edge>
     <edge id="e29" source="n23" target="n15">
+      <data key="d10">
+        <y:QuadCurveEdge straightness="0.1">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:QuadCurveEdge>
+      </data>
+    </edge>
+    <edge id="e30" source="n2" target="n24">
       <data key="d9"/>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:QuadCurveEdge>
+      </data>
+    </edge>
+    <edge id="e31" source="n24" target="n7">
+      <data key="d9"/>
+      <data key="d10">
+        <y:QuadCurveEdge straightness="0.1">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:QuadCurveEdge>
+      </data>
+    </edge>
+    <edge id="e32" source="n24" target="n3">
+      <data key="d9"/>
+      <data key="d10">
+        <y:QuadCurveEdge straightness="0.1">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:QuadCurveEdge>
+      </data>
+    </edge>
+    <edge id="n0::e25" source="n0::n0::n4" target="n0::n9">
+      <data key="d9"/>
+      <data key="d10">
+        <y:QuadCurveEdge straightness="0.1">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:QuadCurveEdge>
+      </data>
+    </edge>
+    <edge id="n0::e26" source="n0::n9" target="n0::n0::n1">
+      <data key="d9"/>
+      <data key="d10">
+        <y:QuadCurveEdge straightness="0.1">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:QuadCurveEdge>
+      </data>
+    </edge>
+    <edge id="n0::e27" source="n0::n9" target="n0::n0::n6">
+      <data key="d9"/>
+      <data key="d10">
+        <y:QuadCurveEdge straightness="0.1">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:QuadCurveEdge>
+      </data>
+    </edge>
+    <edge id="e33" source="n25" target="n0::n1">
+      <data key="d9"/>
+      <data key="d10">
+        <y:QuadCurveEdge straightness="0.1">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#C0C0C0" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:QuadCurveEdge>
+      </data>
+    </edge>
+    <edge id="e34" source="n25" target="n0::n7">
+      <data key="d9"/>
+      <data key="d10">
+        <y:QuadCurveEdge straightness="0.1">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#C0C0C0" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:QuadCurveEdge>
+      </data>
+    </edge>
+    <edge id="e35" source="n26" target="n9">
+      <data key="d9"/>
+      <data key="d10">
+        <y:QuadCurveEdge straightness="0.1">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#C0C0C0" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:QuadCurveEdge>
+      </data>
+    </edge>
+    <edge id="e36" source="n26" target="n19">
+      <data key="d9"/>
+      <data key="d10">
+        <y:QuadCurveEdge straightness="0.1">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#C0C0C0" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
         </y:QuadCurveEdge>
       </data>

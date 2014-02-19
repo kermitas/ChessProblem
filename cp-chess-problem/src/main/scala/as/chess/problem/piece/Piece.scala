@@ -8,9 +8,16 @@ import as.chess.problem.board.{ Board ⇒ ProblemBoard }
 object Piece {
 
   def apply(commandLineArguments: Array[String], startIndex: Int): Stream[Piece] = {
-    val pieces = for (index ← Range(startIndex, commandLineArguments.length, 2); piece ← parsePiece(commandLineArguments, index)) yield piece
 
+    /* will produce non serializable VectorIterator and this is not in Akka spirit
+    val pieces = for (index ← Range(startIndex, commandLineArguments.length, 2); piece ← parsePiece(commandLineArguments, index)) yield piece
     pieces.sortWith(getTopOffenderOrder(_) < getTopOffenderOrder(_)).toStream
+    */
+
+    // Using ListBuffer explicitly, produced stream from this list is seiralizable
+    val list = new scala.collection.mutable.ListBuffer[Piece]
+    for (index ← Range(startIndex, commandLineArguments.length, 2); piece ← parsePiece(commandLineArguments, index)) list += piece
+    list.sortWith(getTopOffenderOrder(_) < getTopOffenderOrder(_)).toStream
   }
 
   def parsePiece(commandLineArguments: Array[String], index: Int): Seq[Piece] = {
@@ -39,7 +46,7 @@ object Piece {
   }
 }
 
-trait Piece { self: ClassicPiece ⇒
+trait Piece extends Serializable { self: ClassicPiece ⇒
 
   def getUnsafeFieldsForPosition(x: Int, y: Int, width: Int, height: Int): Stream[(Int, Int, FieldTranslator)]
 
