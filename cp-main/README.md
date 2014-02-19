@@ -4,6 +4,7 @@ ChesssProblem: cp-mian project
 ### Compile (SBT):
 
 **AkkaMicroArchitecture**
+
 Project is build on top of AkkaMicroArchitecture (https://github.com/kermitas/AkkaMicroArchitecture). To install AkkaMicroArchitecture in your local repository you have to:
 - clone it on your local drive: `git clone https://github.com/kermitas/AkkaMicroArchitecture`
 - go to ama-core folder `cd ama-core`
@@ -13,6 +14,7 @@ Project is build on top of AkkaMicroArchitecture (https://github.com/kermitas/Ak
 - now you can quit SBT `exit`
 
 **ChessProblem**
+
 - go to cp-main project folder `cd cp-main`
 - start SBT `sbt`
 - execute `compile` command
