@@ -6,8 +6,8 @@ class Position(val x: Int, val y: Int) extends Serializable {
 
 object Position {
 
-  def generatePositionsStream(startX: Int, startY: Int, width: Int, height: Int): Stream[Position] = {
-    generatePositionsStream(startX, startY, width, height, width * height)
+  def generatePositionsStream(startXY: (Int, Int), width: Int, height: Int): Stream[Position] = {
+    generatePositionsStream(startXY, width, height, width * height)
   }
 
   /**
@@ -15,8 +15,8 @@ object Position {
    *
    * Stop generating on board end or count limit reached - whichever comes first.
    */
-  def generatePositionsStream(startX: Int, startY: Int, width: Int, height: Int, count: Int): Stream[Position] = {
-    generatePositions(startX, startY, width, height, 0, count)
+  def generatePositionsStream(startXY: (Int, Int), width: Int, height: Int, count: Int): Stream[Position] = {
+    generatePositions(startXY._1, startXY._2, width, height, 0, count)
   }
 
   protected def generatePositions(startX: Int, startY: Int, width: Int, height: Int, current: Int, count: Int): Stream[Position] = {

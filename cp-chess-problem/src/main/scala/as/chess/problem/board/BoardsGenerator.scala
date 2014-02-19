@@ -19,7 +19,7 @@ object BoardsGenerator {
     var sum = 0
     for (fieldsCountInPart ← fieldsCountInEachPart) {
       val startPosition = getPositionFromFieldNumber(sum, board.height)
-      results += generateBoardsStream(board, startPosition._1, startPosition._2, fieldsCountInPart, pieces)
+      results += generateBoardsStream(board, startPosition, fieldsCountInPart, pieces)
       sum += fieldsCountInPart
     }
 
@@ -30,13 +30,12 @@ object BoardsGenerator {
    * Prepare a list of fields count in each slice (part).
    */
   protected def splitBoardIntoParts(board: Board, partsCount: Int): Array[Int] = {
-    val fieldsCount = board.width * board.height
-    val onePartFieldsCount: Int = fieldsCount / partsCount
+    val onePartFieldsCount: Int = board.fieldsCount / partsCount
 
     val partFieldsCount = new Array[Int](partsCount)
     for (i ← 0 until partsCount) partFieldsCount(i) = onePartFieldsCount
 
-    val toAddToLastPart = (fieldsCount - onePartFieldsCount * partsCount)
+    val toAddToLastPart = board.fieldsCount - (onePartFieldsCount * partsCount)
 
     partFieldsCount(partsCount - 1) = partFieldsCount(partsCount - 1) + toAddToLastPart
 
@@ -52,20 +51,20 @@ object BoardsGenerator {
     (x, y)
   }
 
-  def generateBoardsStream(board: Board, startX: Int, startY: Int, fieldsCount: Int, pieces: Stream[Piece]): Stream[Option[Board]] = {
+  def generateBoardsStream(board: Board, startXY: (Int, Int), fieldsCount: Int, pieces: Stream[Piece]): Stream[Option[Board]] = {
     if (board.getSafeFieldsCount >= pieces.length) {
-      getFirstPieceFromPiecesStream(board, startX, startY, fieldsCount, pieces)
+      getFirstPieceFromPiecesStream(board, startXY, fieldsCount, pieces)
     } else {
       Stream.empty
     }
   }
 
-  protected def getFirstPieceFromPiecesStream(board: Board, startX: Int, startY: Int, fieldsCount: Int, pieces: Stream[Piece]): Stream[Option[Board]] = {
+  protected def getFirstPieceFromPiecesStream(board: Board, startXY: (Int, Int), fieldsCount: Int, pieces: Stream[Piece]): Stream[Option[Board]] = {
     pieces match {
 
       case piece #:: restOfPieces ⇒ {
         None #:: {
-          val positionedPieceStream = createPositionedPieces(board, startX, startY, fieldsCount, piece)
+          val positionedPieceStream = createPositionedPieces(board, startXY, fieldsCount, piece)
           generateBoards(board, positionedPieceStream, restOfPieces)
         }
       }
@@ -78,8 +77,8 @@ object BoardsGenerator {
    * For given piece create positioned pieces stream where this piece is associated with all positions where
    * we will try to put it on board.
    */
-  protected def createPositionedPieces(board: Board, startX: Int, startY: Int, fieldsCount: Int, piece: Piece): Stream[PositionedPiece] = {
-    val positions = Position.generatePositionsStream(startX, startY, board.width, board.height, fieldsCount)
+  protected def createPositionedPieces(board: Board, startXY: (Int, Int), fieldsCount: Int, piece: Piece): Stream[PositionedPiece] = {
+    val positions = Position.generatePositionsStream(startXY, board.width, board.height, fieldsCount)
     PositionedPiece.generatePositionedPiecesStream(piece, positions)
   }
 
@@ -122,7 +121,7 @@ object BoardsGenerator {
           }
 
           // go vertically (deep search first) and horizontally (if there is anything to check)
-          None #:: generateBoardsStream(nextBoard, positionOfNextPiece._1, positionOfNextPiece._2, board.width * board.height, restOfPieces) ++: horizontalMove
+          None #:: generateBoardsStream(nextBoard, positionOfNextPiece, board.fieldsCount, restOfPieces) ++: horizontalMove
         }
       }
     }

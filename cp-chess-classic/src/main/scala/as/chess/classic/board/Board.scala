@@ -74,6 +74,8 @@ class Board(protected val array: Array[Array[Field[Piece]]]) extends Serializabl
   val width = array(0).length
   val height = array.length
 
+  val fieldsCount = width * height
+
   def this(width: Int, height: Int, fieldCreator: ⇒ Field[Piece] = Empty.empty) = this(Array.fill[Field[Piece]](height, width)(fieldCreator))
 
   def getTotalFieldsCount: Long = width * height
