@@ -10,7 +10,7 @@ Project is build on top of AkkaMicroArchitecture (https://github.com/kermitas/Ak
 - go to ama-core folder `cd ama-core`
 - start SBT `sbt`
 - execute `compile` command
-- and finally publish it into you local repository `publish-local`
+- publish it into your local repository `publish-local`
 - now you can quit SBT `exit`
 
 **ChessProblem**
@@ -36,8 +36,7 @@ You can use ready distribution without SBT, it is located at `cp-main/distributi
 - start `./bin/run 3 3 1 King` or `bin\run.bat 3 3 1 King`
 
 ### Testing instructions (SBT):
-
-Big boards take a lot of time. You can exclude big boards tests (BigBoardsTest and BigQueensTest) by:
+Big boards take a lot of time. You can exclude big boards tests (BigBoardsTest, BigQueensTest and VeryBigQueensTest) by:
 `sbt test-only * -- -l "BigBoardsTest BigQueensTest VeryBigBoardsTest VeryBigQueensTest"`
 
 To run just one test (for example SmallBoardsTest):
